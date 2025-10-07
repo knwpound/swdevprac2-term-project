@@ -1,18 +1,3 @@
-import { HelpCircle, InfoIcon, Link } from "lucide-react";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupButton,
-  InputGroupInput,
-  InputGroupText,
-  InputGroupTextarea,
-} from "@/components/ui/input-group";
-
 export default function Login() {
   return (
     <div className="w-full h-screen bg-[url(/pics/cheers.jpg)] bg-cover">
@@ -53,7 +38,8 @@ export default function Login() {
 
           <div className="flex flex-row gap-2">
             <p className="text-sm">Don't have an account?</p>
-            <a className="text-sm font-semibold hover:underline active:font-bold">
+            <a className="text-sm font-semibold hover:underline active:font-bold cursor-pointer transition duration-150"
+            href="/register">
               Register
             </a>
           </div>
