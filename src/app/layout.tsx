@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { Inter, Lora } from "next/font/google";
+import { Inter, Lora, DM_Sans } from "next/font/google";
 import "./globals.css";
+import NavBar from "@/components/NavBar";
 
 const lora = Lora({
   variable: "--font-lora",
@@ -9,12 +10,14 @@ const lora = Lora({
   style:["normal","italic"],
 });
 
-const inter = Inter({
+const dm_sans = DM_Sans({
   variable: "--font-inter",
   subsets: ["latin"],
   weight:["400","500","600","700","800","900"],
   style:["normal","italic"],
 });
+
+
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -29,8 +32,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${lora.variable} ${inter.variable} antialiased`}
+        className={`${lora.variable} ${dm_sans.variable} antialiased`}
       >
+        <NavBar/>
         {children}
       </body>
     </html>
