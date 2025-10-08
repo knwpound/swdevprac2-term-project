@@ -2,7 +2,8 @@ import { MapPin, Clock } from "lucide-react";
 import Image from "next/image";
 export function EventCard({name,venue,time}:{name:string,venue:string,time:string}) {
   return (
-    <div className="w-[250px] h-[300px] flex flex-col bg-white rounded-lg shadow-md">
+    <div className="w-[270px] h-[330px] flex flex-col bg-white rounded-lg shadow-sm
+    hover:shadow-lg transition duration-150">
       <div className="relative w-full h-[60%]">
         <Image
           src={"/pics/banner2.png"}
