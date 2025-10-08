@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Lora, DM_Sans } from "next/font/google";
+import { Caveat, Lora, DM_Sans } from "next/font/google";
 import "./globals.css";
 import NavBar from "@/components/NavBar";
 
@@ -11,13 +11,18 @@ const lora = Lora({
 });
 
 const dm_sans = DM_Sans({
-  variable: "--font-inter",
+  variable: "--font-dmsans",
   subsets: ["latin"],
   weight:["400","500","600","700","800","900"],
   style:["normal","italic"],
 });
 
-
+const caveat = Caveat({
+  variable: "--font-caveat",
+  subsets: ["latin"],
+  weight:["400","500","600","700"],
+  style:["normal"],
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -32,7 +37,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${lora.variable} ${dm_sans.variable} antialiased`}
+        className={`${lora.variable} ${dm_sans.variable} ${caveat.variable} antialiased`}
       >
         <NavBar/>
         {children}
