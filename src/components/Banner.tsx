@@ -9,3 +9,18 @@ export function Banner() {
     </div>
   );
 }
+
+export function LightBanner() {
+  return (
+    <div
+      className="w-full h-[400px] bg-[url(/pics/banner2.png)] bg-cover bg-[center_40%] py-15
+        flex flex-col justify-center items-end"
+    >
+      <div className="w-[40%] flex items-center justify-center">
+        <h1 className="w-[50%] text-5xl font-reenie">
+          I have a whole universe in my mind.{" "}
+        </h1>
+      </div>
+    </div>
+  );
+}
