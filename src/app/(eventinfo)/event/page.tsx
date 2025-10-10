@@ -3,7 +3,7 @@ import { CardContainer } from "@/components/CardContainer";
 import { Pagination } from "@/components/reused/Pagination";
 import { Plus } from 'lucide-react';
 
-export default function Event() {
+export default function Events() {
   return (
     <div className="w-full">
       <Banner />
