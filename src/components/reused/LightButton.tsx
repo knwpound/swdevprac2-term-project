@@ -1,6 +1,12 @@
-export function LightButton({text}:{text:string}){
-    return(
-        <button className="font-semibold bg-white outline outline-black px-4 py-1 rounded-md
-        hover:text-white hover:bg-black hover:outline hover:outline-white">{text}</button>
-    )
+import { DefaultButtonProps } from "./DefaultButton";
+export function LightButton({ text, onClick }: DefaultButtonProps) {
+  return (
+    <button
+      className="font-semibold px-4 py-1 rounded-md bg-slate-100
+        hover:bg-slate-300 transition duration-300 cursor-pointer"
+      onClick={onClick}
+    >
+      {text}
+    </button>
+  );
 }
