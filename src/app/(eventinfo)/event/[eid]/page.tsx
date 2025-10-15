@@ -3,8 +3,14 @@ import { Timer } from "@/components/Timer";
 import { CardContainer } from "@/components/CardContainer";
 import { DefaultFooter } from "@/components/Footer";
 import { EventDetailCard } from "@/components/EventDetailCard";
+import getEvent from "@/libs/getEvent";
+import { formatDateTime } from "@/utils/formatDateTime";
 
-export default function EventDetail() {
+export default async function EventDetail({params}:{params:Promise<{eid:string}>}) {
+  const {eid} = await params
+  const eventDetail = await getEvent(eid)
+  const result = formatDateTime(eventDetail.data.eventDate)
+
   return (
     <div>
       <div
@@ -13,7 +19,7 @@ export default function EventDetail() {
       ></div>
       <div className="w-full flex flex-col gap-3 justify-center items-center py-10">
         <h1 className="font-serif font-bold text-xl">
-          The Phantom of Opera 2025
+          {eventDetail.data.name}
         </h1>
         <Timer />
         <div>
@@ -24,33 +30,24 @@ export default function EventDetail() {
         <div className="w-[50%] flex flex-col gap-3">
           <p className="font-bold text-lg">Description</p>
           <p className="text-sm">
-            Lorem ipsum dolor sit amet consectetur. In pulvinar vulputate dui
-            molestie. Sagittis consequat id urna nunc facilisis amet. Adipiscing
-            orci posuere quis in pellentesque nec. Bibendum at quisque arcu
-            placerat sit scelerisque lacinia faucibus nulla.Lorem ipsum dolor
-            sit amet consectetur. In pulvinar vulputate dui molestie. Sagittis
-            consequat id urna nunc facilisis amet. Adipiscing orci posuere quis
-            in pellentesque nec. Bibendum at quisque arcu placerat sit
-            scelerisque lacinia faucibus nulla.
+           {eventDetail.data.description}
           </p>
           <p className="text-sm">
-            Lorem ipsum dolor sit amet consectetur. In pulvinar vulputate dui
-            molestie. Sagittis consequat id urna nunc facilisis amet. Adipiscing
-            orci posuere quis in pellentesque nec. Bibendum at quisque arcu
-            placerat sit scelerisque lacinia faucibus nulla.Lorem ipsum dolor
-            sit amet consectetur. In pulvinar vulputate dui molestie. Sagittis
-            consequat id urna nunc facilisis amet. Adipiscing orci posuere quis
-            in pellentesque nec. Bibendum at quisque arcu placerat sit
-            scelerisque lacinia faucibus nulla.
+            Ticket purchases are subject to standard booking terms. 
+            Each account may purchase a maximum of 5 tickets. 
+            Cancellations are eligible for a 50% refund only 
+            if requested at least 48 hours before the event starts. 
+            Purchased tickets are non-transferable and cannot be redeemed for cash. 
+            Attendees must present their tickets along with valid identification upon entry.
           </p>
         </div>
-        <EventDetailCard />
+        <EventDetailCard date={result.date} time={result.time} venue={eventDetail.data.venue} organizer={eventDetail.data.organizer} ticket={eventDetail.data.availableTicket}/>
       </div>
       <div className="w-full px-10 h-[90vh] space-y-8 flex flex-col justify-center">
         <div className="flex flex-row justify-between">
           <h1 className="font-serif font-bold text-2xl">Upcoming Events</h1>
         </div>
-        <CardContainer />
+        {/* <CardContainer /> */}
       </div>
       <DefaultFooter />
     </div>
