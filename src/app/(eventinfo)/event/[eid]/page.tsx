@@ -1,5 +1,5 @@
 import { DefaultButton } from "@/components/reused/DefaultButton";
-import { Timer } from "@/components/Timer";
+import { Timer } from "@/components/event/Timer";
 import { CardContainer } from "@/components/CardContainer";
 import { DefaultFooter } from "@/components/Footer";
 import { EventDetailCard } from "@/components/EventDetailCard";
@@ -21,7 +21,7 @@ export default async function EventDetail({params}:{params:Promise<{eid:string}>
         <h1 className="font-serif font-bold text-xl">
           {eventDetail.data.name}
         </h1>
-        <Timer />
+        <Timer targetDateISO={eventDetail.data.eventDate}/>
         <div>
           <DefaultButton text="Reserve" />
         </div>
