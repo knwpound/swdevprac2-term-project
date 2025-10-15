@@ -1,7 +1,6 @@
 "use client";
-import { Menu } from "lucide-react";
+
 import { DefaultButton,SecondaryButton } from "./reused/Button";
-import Link from "next/link";
 import { useRouter,usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { NavBarMenu } from "./NavBarMenu";
