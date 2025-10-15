@@ -15,7 +15,7 @@ export async function CardContainer({
           <EventCard
             key = {eventItem._id}
             name={eventItem.name}
-            time={eventItem.eventDate}
+            time={new Date(eventItem.eventDate).toLocaleDateString()}
             venue={eventItem.venue}
           />
         </Link>
