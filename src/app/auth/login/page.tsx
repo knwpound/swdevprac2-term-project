@@ -57,7 +57,7 @@ export default function Login() {
           <div className="flex flex-row gap-2">
             <p className="text-sm">Don't have an account?</p>
             <a className="text-sm font-semibold hover:underline active:font-bold cursor-pointer transition duration-150"
-            href="/register">
+            href="/auth/register">
               Register
             </a>
           </div>
