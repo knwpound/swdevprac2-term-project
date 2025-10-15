@@ -1,13 +1,16 @@
 import { Banner } from "@/components/Banner";
 import { CardContainer } from "@/components/CardContainer";
 import { Pagination } from "@/components/reused/Pagination";
+import getEvents from "@/libs/getEvents";
 import { Plus } from 'lucide-react';
+import { Suspense } from "react";
 
 export default function Events() {
+  const events = getEvents()
   return (
     <div className="w-full">
       <Banner />
-      <div className="w-full px-10 h-[90vh] space-y-8 flex flex-col justify-center">
+      <div className="w-full mt-10 px-10 space-y-8 flex flex-col justify-center">
         <div className="flex flex-row justify-between">
           <h1 className="font-serif font-bold text-2xl">Events</h1>
           <div className="flex flex-row gap-1">
@@ -21,7 +24,10 @@ export default function Events() {
           </div>
           
         </div>
-        <CardContainer />
+        <Suspense fallback={<p>Loading...</p>}>
+          <CardContainer eventJson={events}/>
+        </Suspense>
+        
         <Pagination/>
       </div>
       
