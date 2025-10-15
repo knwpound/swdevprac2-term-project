@@ -23,11 +23,14 @@ export default function NavBar() {
         MyEvent.com
       </a>
       <div className="flex flex-row gap-6 justify-center items-center">
-        <a className="hover:underline active:font-semibold" href="#home">
+        <a className="hover:underline" href="/">
           Home
         </a>
-        <a className="hover:underline active:font-semibold" href="#home">
+        <a className="hover:underline" href="/event">
           Events
+        </a>
+         <a className="hover:underline" href="/ticket">
+          Tickets
         </a>
       </div>
       {session ? (
