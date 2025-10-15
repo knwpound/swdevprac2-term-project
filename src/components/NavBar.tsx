@@ -1,7 +1,6 @@
 "use client";
 import { Menu } from "lucide-react";
-import { DefaultButton } from "./reused/DefaultButton";
-import { LightButton } from "./reused/LightButton";
+import { DefaultButton,SecondaryButton } from "./reused/Button";
 import Link from "next/link";
 import { useRouter,usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
@@ -39,7 +38,7 @@ export default function NavBar() {
         </div>
       ) : (
         <div className="flex flex-row gap-1">
-          <LightButton
+          <SecondaryButton
             text="Sign up"
             onClick={() => {
               router.push("/auth/register");

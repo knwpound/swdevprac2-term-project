@@ -1,3 +1,5 @@
+import { DefaultButton, LightButton } from "./reused/Button"
+
 export function DefaultFooter(){
     return(
         <footer
@@ -12,8 +14,7 @@ export function DefaultFooter(){
           <p className="text-white text-lg">This website is part of </p>
         <p className="text-white text-lg">2110507 Software Development Practice II</p>
         </div>
-        <button className="font-bold text-black bg-white px-6 py-1 rounded-sm
-        hover:text-white hover:bg-black hover:outline hover:outline-white">Contact</button>
+        <LightButton text="Contact"/>
       </footer>
     )
 }
@@ -32,8 +33,7 @@ export function LightFooter(){
           <p className="text-white text-lg">This website is part of </p>
         <p className="text-white text-lg">2110507 Software Development Practice II</p>
         </div>
-        <button className="font-bold text-black bg-white px-6 py-1 rounded-sm
-        hover:text-white hover:bg-black hover:outline hover:outline-white">Contact</button>
+        <DefaultButton text="Contact"/>
       </footer>
     )
 }

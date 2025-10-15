@@ -1,4 +1,4 @@
-import { DefaultButton } from "@/components/reused/DefaultButton";
+import { DefaultButton } from "@/components/reused/Button";
 import { Timer } from "@/components/event/Timer";
 import { CardContainer } from "@/components/CardContainer";
 import { DefaultFooter } from "@/components/Footer";

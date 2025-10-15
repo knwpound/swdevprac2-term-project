@@ -1,6 +1,6 @@
 import { MapPin, Clock } from "lucide-react";
 import Image from "next/image";
-import { DefaultButton } from "./reused/DefaultButton";
+import { DefaultButton } from "./reused/Button";
 export function TicketCard({name,date,time,amount}:{name:string,date:string,time:string,amount:string}) {
   return (
     <div className="w-[270px] h-[330px] flex flex-col bg-white rounded-lg shadow-sm
