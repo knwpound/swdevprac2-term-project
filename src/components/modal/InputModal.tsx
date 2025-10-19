@@ -1,10 +1,17 @@
 "use client";
-import { useEffect, useState } from "react";
 import { DefaultButton, SecondaryButton } from "../reused/Button";
 import { DefaultInput } from "../reused/DefaultInput";
+import { useState } from "react";
 
-export function PicsURLInput({ onClose, onChange, url }: { onClose: () => void, onChange:(e: React.ChangeEvent<HTMLInputElement>) => void, url:string }) {
-
+export function PicsURLInput({
+  onClose,
+  onChange,
+  url,
+}: {
+  onClose: () => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  url: string;
+}) {
   const handleSave = () => {
     onClose();
   };
@@ -18,8 +25,51 @@ export function PicsURLInput({ onClose, onChange, url }: { onClose: () => void, 
           </p>
         </div>
         <div className="w-full gap-2 flex flex-row">
-          <DefaultInput onChange={onChange} value={url}/>
+          <DefaultInput onChange={onChange} value={url} />
           <DefaultButton text="Save" onClick={handleSave} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function DeleteEventModal({
+  onClose,
+  onChange,
+}: {
+  onClose: () => void;
+  onChange: () => void;
+}) {
+  const [inputValue, setInputValue] = useState("");
+
+  const handleDelete = () => {
+    if (inputValue === "Delete me") {
+      onChange();
+      console.log("Deleted!");
+      onClose();
+    }
+  };
+
+  return (
+    <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+      <div className="bg-white rounded-2xl p-6 shadow-lg">
+        <div className="flex flex-col gap-0">
+          <h2 className="text-xl font-semibold mb-4">Are you sure?</h2>
+          <p className="text-gray-600 mb-6">Type "Delete me" to comfirm</p>
+        </div>
+        <div className="w-full gap-2 flex flex-row">
+          <DefaultInput
+            value={inputValue}
+            onChange={(e) => {
+              setInputValue(e.target.value);
+            }}
+          />
+          <SecondaryButton text="Cancel" onClick={onClose} />
+          <DefaultButton
+            text="Delete"
+            onClick={handleDelete}
+            disabled={inputValue !== "Delete me"}
+          />
         </div>
       </div>
     </div>
