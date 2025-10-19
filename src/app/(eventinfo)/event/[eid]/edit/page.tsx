@@ -1,21 +1,28 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
+import { useSession } from "next-auth/react";
 import getEvent from "@/libs/getEvent";
 import updateEvent from "@/libs/updateEvent";
+import deleteEvent from "@/libs/deleteEvent";
 import dayjs, { Dayjs } from "dayjs";
 import { DefaultButton, LightButton } from "@/components/reused/Button";
 import { MainDetailInputCard } from "@/components/event/MainDetailInputCard";
 import { DateInputCard } from "@/components/event/DateInputCard";
 import { TicketRangeCard } from "@/components/event/TicketRangeCard";
 import { Upload } from "lucide-react";
-import { PicsURLInput } from "@/components/modal/InputModal";
+import { PicsURLInput,DeleteEventModal } from "@/components/modal/InputModal";
 
 export default function EditEventPage() {
   const params = useParams();
-  const id = params.eid as string;
   const router = useRouter();
+  
+  const { data: session } = useSession();
+  if (!session || !session.user.token) return null;
 
+  const id = params.eid as string;
+  
+  // 1. Get Event Detail
   const [eventDetail, setEventDetail] = useState<any>(null);
 
   useEffect(() => {
@@ -30,16 +37,21 @@ export default function EditEventPage() {
     if (id) fetchData();
   }, [id]);
 
+  // Modal state
   const [showModal, setShowModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+
+  // Event detail state
   const [name, setName] = useState("");
   const [venue, setVenue] = useState("");
   const [organizer, setOrganizer] = useState("");
   const [detail, setDetail] = useState("");
   const [date, setDate] = useState<Dayjs | null>(null);
-const [startTime, setStartTime] = useState<Dayjs | null>(null);
+  const [startTime, setStartTime] = useState<Dayjs | null>(null);
   const [ticket, setTicket] = useState(0);
   const [url, setUrl] = useState("");
 
+  // 2. Assign initial value
   useEffect(() => {
     console.log("eventDetail updated:", eventDetail);
     if (eventDetail) {
@@ -60,6 +72,7 @@ const [startTime, setStartTime] = useState<Dayjs | null>(null);
     return <p>Loading...</p>;
   }
 
+  // Call Update Event API
   async function handleOnSave() {
     if (!date) return;
 
@@ -81,6 +94,19 @@ const [startTime, setStartTime] = useState<Dayjs | null>(null);
     }
   }
 
+  // Call Delete Event API
+  async function handleOnDelete() {
+    if (!id || !session) return;
+
+    try {
+      const result = await deleteEvent(id,session.user.token);
+      console.log("Event deleted:", result);
+      router.push(`/event`);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   return (
     <div className="w-full flex flex-col gap-5 pt-20 pb-5 px-5">
       {showModal && (
@@ -90,10 +116,17 @@ const [startTime, setStartTime] = useState<Dayjs | null>(null);
           url={url}
         />
       )}
+      {showDeleteModal&&(
+        <DeleteEventModal
+        onClose={() => setShowDeleteModal(false)}
+        onChange={handleOnDelete}
+        />
+      )}
+      
       <div className="flex flex-row justify-between">
-        <h1 className="text-2xl font-bold font-serif">Add New Event</h1>
+        <h1 className="text-2xl font-bold font-serif">Edit Event #{id}</h1>
         <div className="flex flex-row gap-3">
-          <LightButton text="Cancel" />
+          <LightButton text="Delete" onClick={()=>setShowDeleteModal(!showDeleteModal)}/>
           <DefaultButton text="Save" onClick={handleOnSave} />
         </div>
       </div>
