@@ -4,11 +4,19 @@ export function MainDetailInputCard({
   onChangeVenue,
   onChangeOrganizer,
   onChangeDetail,
+  valueTitle,
+  valueVenue,
+  valueOrganizer,
+  valueDetail,
 }: {
   onChangeTitle: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeVenue: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeOrganizer: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeDetail: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  valueTitle?: string;
+  valueVenue?: string;
+  valueOrganizer?: string;
+  valueDetail?: string;
 }) {
   return (
     <div className="w-[50%] flex flex-col p-5 bg-white rounded-md shadow-md gap-2">
@@ -20,17 +28,18 @@ export function MainDetailInputCard({
           placeholder="Title"
           className="w-full bg-gray-200 outline outline-gray-300
                                     py-1 px-3 rounded-sm focus:outline-gray-400 focus:outline-2"
-          onChange={onChangeTitle}
+          value={valueTitle}
+                                    onChange={onChangeTitle}
         />
       </div>
       <div className="w-full flex flex-row gap-3">
         <div className="w-[50%] flex flex-col gap-1">
           <p className="text-sm font-semibold">Venue</p>
-          <DefaultInput onChange={onChangeVenue} />
+          <DefaultInput onChange={onChangeVenue} value={valueVenue}/>
         </div>
         <div className="w-[50%] flex flex-col gap-1">
           <p className="text-sm font-semibold">Organizer</p>
-          <DefaultInput onChange={onChangeOrganizer} />
+          <DefaultInput onChange={onChangeOrganizer} value={valueOrganizer}/>
         </div>
       </div>
       <div className="flex flex-col gap-1">
@@ -41,6 +50,7 @@ export function MainDetailInputCard({
                      py-1 px-3 rounded-sm resize-none focus:outline-gray-400 focus:outline-2
                      transition duration-150"
           onChange={onChangeDetail}
+          value={valueDetail}
         ></textarea>
       </div>
     </div>
