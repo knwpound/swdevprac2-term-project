@@ -6,7 +6,6 @@ import { Plus } from "lucide-react";
 import { Suspense } from "react";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import NextAuthProvider from "../../../../providers/NextAuthProvider";
 import Link from "next/link";
 
 export default async function Events() {
