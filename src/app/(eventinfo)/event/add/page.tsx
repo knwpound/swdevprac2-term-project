@@ -33,6 +33,7 @@ export  default function AddEventPage() {
         venue,
         organizer, 
         availableTicket: ticket,
+        posterPicture: url,
       });
       console.log("Event created:", result);
       router.push(`/event/${result.data._id}`);
