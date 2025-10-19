@@ -5,12 +5,15 @@ import { DefaultFooter } from "@/components/Footer";
 import { EventDetailCard } from "@/components/EventDetailCard";
 import getEvent from "@/libs/getEvent";
 import { formatDateTime } from "@/utils/formatDateTime";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import Link from "next/link";
 
 export default async function EventDetail({params}:{params:Promise<{eid:string}>}) {
   const {eid} = await params
   const eventDetail = await getEvent(eid)
   const result = formatDateTime(eventDetail.data.eventDate)
-
+  const session = await getServerSession(authOptions);
   return (
     <div>
       <div
@@ -23,7 +26,14 @@ export default async function EventDetail({params}:{params:Promise<{eid:string}>
         </h1>
         <Timer targetDateISO={eventDetail.data.eventDate}/>
         <div>
-          <DefaultButton text="Reserve" />
+          
+            {session?.user.role === "admin" ? (
+              <Link href={`/event/${eid}/edit`}><DefaultButton text="Edit"/>
+              </Link>
+              
+            ) : (<DefaultButton text="Reserve"/>)}
+          
+          
         </div>
       </div>
       <div className="w-full flex flex-row gap-25 px-5 justify-center">
