@@ -1,5 +1,4 @@
-import { DefaultButton } from "@/components/reused/DefaultButton";
-import { LightButton } from "@/components/reused/LightButton";
+import { DefaultButton,LightButton } from "@/components/reused/Button";
 import Image from "next/image";
 export default function TicketDetail() {
   return (
