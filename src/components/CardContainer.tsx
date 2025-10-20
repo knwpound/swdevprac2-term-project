@@ -11,7 +11,7 @@ export async function CardContainer({
   return (
     <div className="w-full flex flex-row flex-wrap gap-6 justify-center">
       {eventJsonReady.data.map((eventItem: EventItem) => (
-        <Link href={`/event/${eventItem._id}`}>
+        <Link key={eventItem._id} href={`/event/${eventItem._id}`}>
           <EventCard
             key = {eventItem._id}
             name={eventItem.name}
