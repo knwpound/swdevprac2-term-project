@@ -75,3 +75,37 @@ export function DeleteEventModal({
     </div>
   );
 }
+
+export function ReservationModal({
+  onClose,
+  onClick,
+  onChange,
+}: {
+  onClose: () => void;
+  onClick: () => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}) {
+  return (
+    <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+      <div className="flex flex-col gap-6 bg-white rounded-2xl p-6 shadow-lg items-center justify-center">
+        <div className="flex flex-col gap-2 items-center justify-center">
+          <h2 className="text-xl font-semibold">Confirm Reservation</h2>
+          <p className="text-gray-600">Choose ticket amount from 1-4</p>
+        </div>
+
+        <div className="w-full gap-2 flex flex-row justify-center">
+          <DefaultInput
+            type="number"
+            className="text-center"
+            min="1"
+            max="4"
+            placeholder=""
+            onChange={onChange}
+          ></DefaultInput>
+          <SecondaryButton text="Cancel" onClick={onClose} />
+          <DefaultButton text="Reserve" onClick={onClick} />
+        </div>
+      </div>
+    </div>
+  );
+}
