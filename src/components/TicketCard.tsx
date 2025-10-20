@@ -1,7 +1,8 @@
-import { MapPin, Clock } from "lucide-react";
 import Image from "next/image";
 import { DefaultButton } from "./reused/Button";
-export function TicketCard({name,date,time,amount}:{name:string,date:string,time:string,amount:string}) {
+import { formatDateTime } from "@/utils/formatDateTime";
+export function TicketCard({name,date,amount}:{name:string,date:string,amount:number}) {
+  const eventDate = formatDateTime(date)
   return (
     <div className="w-[270px] h-[330px] flex flex-col bg-white rounded-lg shadow-sm
     hover:shadow-lg transition duration-150">
@@ -29,7 +30,7 @@ export function TicketCard({name,date,time,amount}:{name:string,date:string,time
               Date
             </p>
             <p className="text-md text-black font-semibold">
-              {date}
+              {eventDate.date}
             </p>
           </div>
           <div className="flex flex-col gap-0">
@@ -37,7 +38,7 @@ export function TicketCard({name,date,time,amount}:{name:string,date:string,time
               Time
             </p>
             <p className="text-md text-black font-semibold">
-              {time}
+              {eventDate.time}
             </p>
           </div>
           <div className="flex flex-col gap-0">
