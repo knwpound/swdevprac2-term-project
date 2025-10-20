@@ -23,7 +23,7 @@ export function formatDateTime(isoString: string):{ date: string; time: string }
   const hours = String(dateObj.getUTCHours()).padStart(2, "0");
   const minutes = String(dateObj.getUTCMinutes()).padStart(2, "0");
   const seconds = String(dateObj.getUTCSeconds()).padStart(2, "0");
-  const time = `${hours}:${minutes}:${seconds}Z`;
+  const time = `${hours}:${minutes}`;
 
   return { date, time };
 }
