@@ -1,10 +1,19 @@
+import getTickets from "@/libs/getTickets";
 import { Banner } from "@/components/Banner";
-import { CardContainer } from "@/components/CardContainer";
 import { Pagination } from "@/components/reused/Pagination";
 import { TicketContainer } from "@/components/TicketContainer";
 import { Plus } from 'lucide-react';
+import { Suspense } from "react";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
-export default function Tickets() {
+export default async function Tickets() {
+  const session = await getServerSession(authOptions);
+  let tickets;
+  if (session){
+    tickets = await getTickets(session.user.token)
+  }
+  
   return (
     <div className="w-full">
       <Banner />
@@ -22,7 +31,7 @@ export default function Tickets() {
           </div>
           
         </div>
-        <TicketContainer/>
+        <TicketContainer ticketJson={tickets}/>
         <Pagination/>
       </div>
       
