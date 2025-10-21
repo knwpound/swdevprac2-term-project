@@ -1,9 +1,83 @@
-import { DefaultButton,LightButton } from "@/components/reused/Button";
+"use client";
+import { useState, useEffect, use } from "react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import getTicket from "@/libs/getTicket";
+import updateTicket from "@/libs/editTicker";
+import deleteTicket from "@/libs/deleteTicket";
 import Image from "next/image";
-export default function TicketDetail() {
+import { DefaultButton, LightButton } from "@/components/reused/Button";
+import { DefaultInput } from "@/components/reused/DefaultInput";
+import { DeleteEventModal } from "@/components/modal/InputModal";
+import { formatDateTime } from "@/utils/formatDateTime";
+
+export default function TicketDetail({
+  params,
+}: {
+  params: Promise<{ tid: string }>;
+}) {
+  const router = useRouter();
+  const { tid } = use(params);
+  const { data: session } = useSession();
+
+  const [ticket, setTicket] = useState();
+  const [totalTicket, setTotalTicket] = useState(0);
+  const [eventDate, setEventDate] = useState("");
+  const [disabled, setDisabled] = useState(true);
+  const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    if (!session) return;
+
+    async function fetchTicket() {
+      const data = await getTicket(tid, session.user.token);
+      setTicket(data.data);
+      setTotalTicket(data.data.ticketAmount);
+      setEventDate(formatDateTime(data.data.event.eventDate).date);
+    }
+    fetchTicket();
+  }, [tid]);
+
+  async function handleOnSave() {
+    if (!tid || !session) return;
+    setDisabled(true);
+
+    try {
+      const result = await updateTicket({
+        id: tid,
+        ticketAmount: totalTicket,
+        token: session?.user.token,
+      });
+      alert("Ticket updated");
+      console.log(result);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  // Call Delete Event API
+  async function handleOnDelete() {
+    if (!tid || !session) return;
+
+    try {
+      const result = await deleteTicket(tid, session.user.token);
+      alert("Ticket deleted")
+      console.log("Ticket deleted:", result);
+      router.push(`/ticket`);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   return (
     <div className="w-full flex flex-row pt-25 px-5 justify-center gap-5">
-      <div className="relative w-[50%] h-[300px] shadow-md">
+      {showModal && (
+        <DeleteEventModal
+          onClose={() => setShowModal(false)}
+          onChange={handleOnDelete}
+        />
+      )}
+      <div className="relative w-[50%] h-[400px] shadow-md">
         <Image
           src={"/pics/banner2.png"}
           alt=""
@@ -14,24 +88,49 @@ export default function TicketDetail() {
       <div className="bg-white flex flex-col justify-center px-5 rounded-md gap-5 py-2 shadow-md">
         <div>
           <h1 className="text-2xl font-semibold">The Phomtom of Opera</h1>
-          <p>Ticket id #abcdef</p>
+          <p>Ticket id #{ticket?._id.slice(-5)}</p>
         </div>
-        <div className="flex flex-col gap-1">
-          <p className="text-xs text-gray-500 font-semibold">Name</p>
-          <p className="text-lg text-black font-medium">Kanokwan</p>
-          <div className="flex flex-col gap-0">
-            <p className="text-xs text-gray-500 font-semibold">Date</p>
-            <p className="text-lg text-black font-medium">21 Oct</p>
+        <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-1">
+            <p className="text-xs text-gray-500 font-semibold">Name</p>
+            <DefaultInput
+              value={ticket?.user?.name || ""}
+              disabled={true}
+            ></DefaultInput>
           </div>
-          <div className="flex flex-col gap-0">
+          <div className="flex flex-col gap-1">
+            <p className="text-xs text-gray-500 font-semibold">Date</p>
+            <DefaultInput value={eventDate} disabled={true}></DefaultInput>
+          </div>
+          <div className="flex flex-col gap-1">
             <p className="text-xs text-gray-500 font-semibold">Total Tickets</p>
-            <p className="text-lg text-black font-medium">4</p>
+            <DefaultInput
+              type="number"
+              className="font-medium"
+              value={totalTicket.toString()}
+              disabled={disabled}
+              min="1"
+              max="5"
+              onChange={(e) => setTotalTicket(e.target.value)}
+            ></DefaultInput>
           </div>
         </div>
 
         <div className="w-full flex flex-row items-end gap-3 justify-end">
-          <LightButton text="Cancel" />
-          <DefaultButton text="Edit" />
+          {disabled ? (
+            <div className="w-full flex flex-row items-end gap-3 justify-end">
+              <LightButton text="Delete" onClick={() => setShowModal(true)} />
+              <DefaultButton
+                text="Edit"
+                onClick={() => setDisabled(!disabled)}
+              />
+            </div>
+          ) : (
+            <div className="w-full flex flex-row items-end gap-3 justify-end">
+              <LightButton text="Cancel" onClick={() => setDisabled(true)} />
+              <DefaultButton text="Save" onClick={handleOnSave} />
+            </div>
+          )}
         </div>
       </div>
     </div>
