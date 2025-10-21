@@ -15,11 +15,15 @@ export default async function createTicket({
     },
     body: JSON.stringify({
       event,
-      ticketAmount,
+      ticketAmount: Number(ticketAmount),
     }),
   });
 
   if (!response.ok) {
+    const errorData = await response.json().catch(() => null);
+    const errorMessage =
+      errorData?.message || errorData?.error || "Failed to create reservation";
+    alert(errorMessage);
     throw new Error("Failed to reserve ticket");
   }
 

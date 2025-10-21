@@ -46,6 +46,10 @@ export default async function updateEvent({
   });
 
   if (!response.ok) {
+    const errorData = await response.json().catch(() => null);
+    const errorMessage =
+      errorData?.message || errorData?.error || "Failed to update event";
+    alert(errorMessage);
     throw new Error(`Failed to update event ${eid}`);
   }
 

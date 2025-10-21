@@ -46,6 +46,7 @@ export default function EventDetail({ params }: { params: { eid: string } }) {
         token: session.user.token,
       });
       console.log("Ticket created:", result);
+      alert(`Ticket id ${result._id} is created!`)
       router.push(`/ticket`);
     } catch (err) {
       console.error(err);

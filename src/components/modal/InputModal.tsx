@@ -14,6 +14,10 @@ export function PicsURLInput({
 }) {
   const [picSrc, setPicSrc] = useState(url);
   const handleSave = () => {
+    if (picSrc == "") {
+      alert("Please enter valid picture url");
+      return;
+    }
     onSave(picSrc);
     onClose();
   };
@@ -26,13 +30,15 @@ export function PicsURLInput({
             Please fill a correct website url
           </p>
         </div>
-        <div className="w-full gap-2 flex flex-row">
-          <DefaultInput
-            value={picSrc}
-            onChange={(e) => {
-              setPicSrc(e.target.value);
-            }}
-          />
+        <DefaultInput
+          value={picSrc}
+          onChange={(e) => {
+            setPicSrc(e.target.value);
+          }}
+          className="w-full mb-5"
+        />
+        <div className="w-full gap-2 flex flex-row justify-center">
+          <SecondaryButton text="Cancel" onClick={onClose} />
           <DefaultButton text="Save" onClick={handleSave} />
         </div>
       </div>
@@ -92,6 +98,10 @@ export function ReservationModal({
   onClick: () => void;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) {
+  function handleReservation(){
+    onClose;
+    onClick;
+  }
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
       <div className="flex flex-col gap-6 bg-white rounded-2xl p-6 shadow-lg items-center justify-center">

@@ -89,6 +89,7 @@ export default function EditEventPage() {
         posterPicture: url,
       });
       console.log("Event updated:", result);
+      alert(`Event ${id} updated`)
       router.push(`/event/${id}`);
     } catch (err) {
       console.error(err);
@@ -102,6 +103,7 @@ export default function EditEventPage() {
     try {
       const result = await deleteEvent(id, session.user.token);
       console.log("Event deleted:", result);
+      alert(`Event ${id} deleted`)
       router.push(`/event`);
     } catch (err) {
       console.error(err);

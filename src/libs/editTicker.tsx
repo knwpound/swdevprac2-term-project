@@ -17,12 +17,16 @@ export default async function updateTicket({
       ticketAmount,
     }),
   });
- 
-  if (!response.ok) {
-    const errorBody = await response.text(); 
-    console.error("Server Response Body:", errorBody);
 
-    throw new Error(`Failed to edit ticket detail ${id}. Status: ${response.status}.`);
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => null);
+    const errorMessage =
+      errorData?.message || errorData?.error || "Failed to edit ticket";
+    alert(errorMessage);
+
+    throw new Error(
+      `Failed to edit ticket detail ${id}. Status: ${response.status}.`
+    );
   }
 
   return await response.json();

@@ -7,6 +7,7 @@ import { DateInputCard } from "@/components/event/DateInputCard";
 import { TicketRangeCard } from "@/components/event/TicketRangeCard";
 import { Upload } from "lucide-react";
 import { PicsURLInput } from "@/components/modal/InputModal";
+import Image from "next/image";
 import createEvent from "@/libs/postEvent";
 import { useRouter } from "next/navigation";
 
@@ -23,8 +24,10 @@ export  default function AddEventPage() {
   const router = useRouter();
 
   async function handleOnSave() {
-    if (!date) return;
-
+    if (!name||!date||!venue||!organizer||!ticket){
+      alert("Event's Name,Date,Venue, Organizer and Available Ticket are required!");
+      return;
+    }
     try {
       const result = await createEvent({
         name,
@@ -47,32 +50,38 @@ export  default function AddEventPage() {
       {showModal && (
         <PicsURLInput
           onClose={() => setShowModal(false)}
-          onChange={(e: any) => setUrl(e.target.value)}
+          onSave={(newUrl)=>setUrl(newUrl)}
           url={url}
         />
       )}
       <div className="flex flex-row justify-between">
         <h1 className="text-2xl font-bold font-serif">Add New Event</h1>
         <div className="flex flex-row gap-3">
-          <LightButton text="Cancel" />
+          <LightButton text="Cancel" onClick={()=>router.push(`/event`)}/>
           <DefaultButton text="Save" onClick={handleOnSave}/>
         </div>
       </div>
       <div className="w-full flex flex-col gap-5">
         <div className="w-full flex flex-col gap-3 bg-white shadow-md p-5 rounded-md shadow-md">
           <p className="text-lg font-semibold">Thumbnail</p>
-          <div className="w-full h-[300px] flex flex-col gap-2 items-center justify-center bg-gray-200 rounded-md ">
-            <div
-              className="bg-white p-2 rounded-md hover:bg-black hover:text-white transition duration-250 cursor-pointer"
-              onClick={(e) => setShowModal(true)}
-            >
-              <Upload size={"30"} className="hover:text-white" />
-            </div>
-            <div className="text-center hover:text-slate-600 cursor-pointer">
-              <h1 className="font-semibold">Click Here to Add Photo Path</h1>
-              <p className="text-sm">Ex. "https://google.drive.com"</p>
-            </div>
-          </div>
+          <div className="w-full h-[300px] relative flex flex-col items-center justify-center bg-gray-200 rounded-md overflow-hidden">
+                      {/* Background image */}
+                      <Image src={url} alt="" fill className="object-cover" />
+          
+                      {/* Upload button */}
+                      <div
+                        className="z-10 bg-white p-2 rounded-md hover:bg-black hover:text-white transition duration-200 cursor-pointer"
+                        onClick={() => setShowModal(true)}
+                      >
+                        <Upload size={30} />
+                      </div>
+          
+                      {/* Text */}
+                      <div className="z-10 text-center mt-2 hover:text-slate-600 cursor-pointer">
+                        <h1 className="font-semibold">Click Here to Add Photo Path</h1>
+                        <p className="text-sm">Ex. "https://google.drive.com"</p>
+                      </div>
+                    </div>
         </div>
         <div className="flex flex-row gap-5">
           <MainDetailInputCard
