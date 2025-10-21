@@ -16,19 +16,10 @@ interface EventJson {
   data: EventItem[];
 }
 
-interface Event {
-  _id: string;
-  name: string;
-  description: string;
-  eventDate: string;
-  venue: string;
-  availableTicket: number;
-}
-
 interface TicketItem {
   _id: string;
   user: string; 
-  event: Event;
+  event: EventItem;
   ticketAmount: number;
 }
 
