@@ -1,12 +1,12 @@
 import { MapPin, Clock } from "lucide-react";
 import Image from "next/image";
-export function EventCard({name,venue,time}:{name:string,venue:string,time:string}) {
+export function EventCard({name,venue,time,picSrc}:{name:string,venue:string,time:string,picSrc:string}) {
   return (
     <div className="w-[270px] h-[330px] flex flex-col bg-white rounded-lg shadow-sm
     hover:shadow-lg transition duration-150">
       <div className="relative w-full h-[60%]">
         <Image
-          src={"/pics/banner2.png"}
+          src={picSrc}
           alt=""
           fill
           className="object-cover rounded-t-lg"

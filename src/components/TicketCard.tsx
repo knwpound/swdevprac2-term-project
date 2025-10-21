@@ -1,14 +1,14 @@
 import Image from "next/image";
 import { DefaultButton } from "./reused/Button";
 import { formatDateTime } from "@/utils/formatDateTime";
-export function TicketCard({name,date,amount}:{name:string,date:string,amount:number}) {
+export function TicketCard({name,date,amount,picSrc}:{name:string,date:string,amount:number,picSrc:string}) {
   const eventDate = formatDateTime(date)
   return (
     <div className="w-[270px] h-[330px] flex flex-col bg-white rounded-lg shadow-sm
     hover:shadow-lg transition duration-150">
       <div className="relative w-full h-[60%]">
         <Image
-          src={"/pics/banner2.png"}
+          src={picSrc}
           alt=""
           fill
           className="object-cover rounded-t-lg"

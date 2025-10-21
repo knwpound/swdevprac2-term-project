@@ -3,6 +3,7 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import getEvent from "@/libs/getEvent";
 import createTicket from "@/libs/postTicket";
 import { DefaultButton } from "@/components/reused/Button";
@@ -51,9 +52,16 @@ export default function EventDetail({ params }: { params: { eid: string } }) {
   return (
     <div>
       <div
-        className="w-full h-[400px] bg-[url(/pics/banner1.png)] bg-cover bg-[center_40%] py-15
-        flex flex-col justify-center items-center"
-      ></div>
+        className={`w-full h-[400px] py-15
+        flex flex-col justify-center items-center relative`}
+      >
+        <Image
+          src={eventDetail.data.posterPicture}
+          alt=""
+          fill
+          className="object-cover rounded-t-lg"
+        ></Image>
+      </div>
       {reserveModal ? (
         <ReservationModal
           onClose={() => setReserveModal(!reserveModal)}

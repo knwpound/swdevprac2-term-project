@@ -11,12 +11,14 @@ export async function CardContainer({
   return (
     <div className="w-full flex flex-row flex-wrap gap-6 justify-center">
       {eventJsonReady.data.map((eventItem: EventItem) => (
+        
         <Link key={eventItem._id} href={`/event/${eventItem._id}`}>
           <EventCard
             key = {eventItem._id}
             name={eventItem.name}
             time={new Date(eventItem.eventDate).toLocaleDateString()}
             venue={eventItem.venue}
+            picSrc={eventItem.posterPicture}
           />
         </Link>
       ))}

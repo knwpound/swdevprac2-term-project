@@ -18,6 +18,7 @@ export async function TicketContainer({
             name={ticketItem.event.name}
             date={ticketItem.event.eventDate}
             amount={ticketItem.ticketAmount}
+            picSrc={ticketItem.event.posterPicture}
           />
         </Link>
       ))}
