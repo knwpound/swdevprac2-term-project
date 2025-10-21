@@ -31,11 +31,6 @@ export default async function Home() {
         <div className="w-full px-10 py-15 flex flex-col justify-center">
           <div className="flex flex-row justify-between pb-10">
             <h1 className="font-serif font-bold text-2xl">Newest Event</h1>
-            <input
-              type="text"
-              placeholder="Search"
-              className="w-[300px] bg-gray-200 px-2 rounded-md"
-            />
           </div>
           <Suspense fallback={<SkeletonContainer/>}>
             <CardContainer eventJson={recentEvents} />

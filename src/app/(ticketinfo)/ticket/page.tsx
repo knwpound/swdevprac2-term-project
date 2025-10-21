@@ -6,13 +6,13 @@ import { Plus } from 'lucide-react';
 import { Suspense } from "react";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { SkeletonContainer } from "@/components/SkeletonContainer";
+
 
 export default async function Tickets() {
   const session = await getServerSession(authOptions);
-  let tickets;
-  if (session){
-    tickets = await getTickets(session.user.token)
-  }
+  if (!session) return
+  const tickets = getTickets(session.user.token)
   
   return (
     <div className="w-full">
@@ -31,7 +31,10 @@ export default async function Tickets() {
           </div>
           
         </div>
-        <TicketContainer ticketJson={tickets}/>
+        <Suspense fallback={<SkeletonContainer/>}>
+          <TicketContainer ticketJson={tickets}/>
+        </Suspense>
+       
         <Pagination/>
       </div>
       

@@ -1,6 +1,7 @@
 import { Banner } from "@/components/Banner";
 import { CardContainer } from "@/components/CardContainer";
 import { Pagination } from "@/components/reused/Pagination";
+import { SkeletonContainer } from "@/components/SkeletonContainer";
 import getEvents from "@/libs/getEvents";
 import { Plus } from "lucide-react";
 import { Suspense } from "react";
@@ -37,7 +38,7 @@ export default async function Events() {
             ) : null}
           </div>
         </div>
-        <Suspense fallback={<p>Loading...</p>}>
+        <Suspense fallback={<SkeletonContainer/>}>
           <CardContainer eventJson={events} />
         </Suspense>
         <Pagination />

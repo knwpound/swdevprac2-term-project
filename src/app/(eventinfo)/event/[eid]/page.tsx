@@ -11,6 +11,7 @@ import { Timer } from "@/components/event/Timer";
 import { DefaultFooter } from "@/components/Footer";
 import { EventDetailCard } from "@/components/EventDetailCard";
 import { ReservationModal } from "@/components/modal/InputModal";
+import { SkeletonContainer } from "@/components/SkeletonContainer";
 import { formatDateTime } from "@/utils/formatDateTime";
 
 export default function EventDetail({ params }: { params: { eid: string } }) {
