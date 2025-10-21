@@ -14,13 +14,13 @@ export default function NavBar() {
   return (
     <div
       data-aos="fade-up"
-      className="w-full flex flex-row justify-between gap-[32px] px-5 py-3 shadow-sm 
-      fixed z-50 items-center bg-white"
+      className="w-full flex flex-row justify-between px-5 py-3 shadow-sm 
+      fixed z-50 items-center bg-white max-sm:justify-center"
     >
-      <a className="" href="#home">
+      <a className="hidden sm:inline" href="#home">
         MyEvent.com
       </a>
-      <div className="flex flex-row gap-6 justify-center items-center">
+      <div className="flex flex-row gap-6 max-sm:gap-3 justify-center items-center">
         <a className="hover:underline" href="/">
           Home
         </a>
@@ -34,11 +34,11 @@ export default function NavBar() {
         ) : null}
       </div>
       {session ? (
-        <div>
+        <div className="max-sm:absolute max-sm:right-3">
           <NavBarMenu />
         </div>
       ) : (
-        <div className="flex flex-row gap-1">
+        <div className="flex flex-row gap-1 max-sm:flex-col">
           <SecondaryButton
             text="Sign up"
             onClick={() => {
