@@ -20,16 +20,16 @@ export default function TicketDetail({
   const { tid } = use(params);
   const { data: session } = useSession();
 
-  const [ticket, setTicket] = useState();
+  const [ticket, setTicket] = useState<TicketItem>();
   const [totalTicket, setTotalTicket] = useState(0);
   const [eventDate, setEventDate] = useState("");
   const [disabled, setDisabled] = useState(true);
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    if (!session) return;
-
     async function fetchTicket() {
+      if (!session) return;
+
       const data = await getTicket(tid, session.user.token);
       setTicket(data.data);
       setTotalTicket(data.data.ticketAmount);
@@ -61,14 +61,14 @@ export default function TicketDetail({
 
     try {
       const result = await deleteTicket(tid, session.user.token);
-      alert("Ticket deleted")
+      alert("Ticket deleted");
       console.log("Ticket deleted:", result);
       router.push(`/ticket`);
     } catch (err) {
       console.error(err);
     }
   }
-
+  if (!ticket) return;
   return (
     <div className="w-full flex flex-row pt-25 px-5 justify-center gap-5">
       {showModal && (
@@ -79,7 +79,7 @@ export default function TicketDetail({
       )}
       <div className="relative w-[50%] h-[400px] shadow-md">
         <Image
-          src={ticket?.event.posterPicture}
+          src={ticket.event.posterPicture}
           alt=""
           fill
           className="object-cover rounded-lg"
@@ -94,7 +94,7 @@ export default function TicketDetail({
           <div className="flex flex-col gap-1">
             <p className="text-xs text-gray-500 font-semibold">Name</p>
             <DefaultInput
-              value={ticket?.user?.name || ""}
+              value={ticket.user.name || ""}
               disabled={true}
             ></DefaultInput>
           </div>
@@ -111,7 +111,7 @@ export default function TicketDetail({
               disabled={disabled}
               min="1"
               max="5"
-              onChange={(e) => setTotalTicket(e.target.value)}
+              onChange={(e) => setTotalTicket(parseInt(e.target.value, 10))}
             ></DefaultInput>
           </div>
         </div>

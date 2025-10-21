@@ -5,18 +5,20 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import getEvent from "@/libs/getEvent";
+import getEvents from "@/libs/getEvents";
 import createTicket from "@/libs/postTicket";
 import { DefaultButton } from "@/components/reused/Button";
 import { Timer } from "@/components/event/Timer";
 import { DefaultFooter } from "@/components/Footer";
 import { EventDetailCard } from "@/components/EventDetailCard";
 import { ReservationModal } from "@/components/modal/InputModal";
+import { CardContainer } from "@/components/CardContainer";
+import { Suspense } from "react";
 import { SkeletonContainer } from "@/components/SkeletonContainer";
 import { formatDateTime } from "@/utils/formatDateTime";
 
 export default function EventDetail({ params }: { params: { eid: string } }) {
   const { eid } = params;
-  // const eventDetail = await getEvent(eid)
   const router = useRouter();
   const { data: session } = useSession();
 
@@ -89,7 +91,7 @@ export default function EventDetail({ params }: { params: { eid: string } }) {
           )}
         </div>
       </div>
-      <div className="w-full flex flex-row gap-25 px-5 justify-center">
+      <div className="w-full flex flex-row gap-25 px-5 justify-center pb-15">
         <div className="w-[50%] flex flex-col gap-3">
           <p className="font-bold text-lg">Description</p>
           <p className="text-sm">{eventDetail.data.description}</p>
@@ -109,12 +111,6 @@ export default function EventDetail({ params }: { params: { eid: string } }) {
           organizer={eventDetail.data.organizer}
           ticket={eventDetail.data.availableTicket}
         />
-      </div>
-      <div className="w-full px-10 h-[90vh] space-y-8 flex flex-col justify-center">
-        <div className="flex flex-row justify-between">
-          <h1 className="font-serif font-bold text-2xl">Upcoming Events</h1>
-        </div>
-        {/* <CardContainer /> */}
       </div>
       <DefaultFooter />
     </div>
