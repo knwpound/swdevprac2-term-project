@@ -37,7 +37,7 @@ export default async function Home() {
           </Suspense>
         </div>
         {session ? (
-          <div className="w-full h-screen bg-[#F7EBD3] py-15 flex flex-col items-center justify-center gap-10">
+          <div className="w-full bg-[#F7EBD3] py-15 flex flex-col items-center justify-center gap-10">
             <h1 className="font-serif font-bold text-2xl">My Tickets</h1>
             <Suspense fallback={<div>Tickets Loading...</div>}>
               <TicketContainer ticketJson={tickets} />

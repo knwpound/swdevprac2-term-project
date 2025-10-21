@@ -70,14 +70,14 @@ export default function TicketDetail({
   }
   if (!ticket) return;
   return (
-    <div className="w-full flex flex-row pt-25 px-5 justify-center gap-5">
+    <div className="w-full flex flex-row pt-25 px-5 justify-center gap-5 max-sm:flex-col">
       {showModal && (
         <DeleteEventModal
           onClose={() => setShowModal(false)}
           onChange={handleOnDelete}
         />
       )}
-      <div className="relative w-[50%] h-[400px] shadow-md">
+      <div className="relative w-[50%] max-sm:w-full h-[400px] shadow-md">
         <Image
           src={ticket.event.posterPicture}
           alt=""

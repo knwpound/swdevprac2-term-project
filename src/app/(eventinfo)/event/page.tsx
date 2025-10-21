@@ -18,11 +18,11 @@ export default async function Events() {
       <div className="w-full mt-10 px-10 space-y-8 flex flex-col justify-center">
         <div className="flex flex-row justify-between">
           <h1 className="font-serif font-bold text-2xl">Events</h1>
-          <div className="flex flex-row gap-1">
+          <div className="w-[30%] flex flex-row gap-1">
             <input
               type="text"
               placeholder="Search"
-              className="w-[300px] bg-gray-200 px-2 rounded-md"
+              className="w-full bg-gray-200 px-2 rounded-md"
             />
             {session?.user.role === "admin" ? (
               <Link href={"/event/add"}>

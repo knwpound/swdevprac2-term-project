@@ -19,7 +19,7 @@ export function MainDetailInputCard({
   valueDetail?: string;
 }) {
   return (
-    <div className="w-[50%] flex flex-col p-5 bg-white rounded-md shadow-md gap-2">
+    <div className="w-[50%] max-sm:w-full flex flex-col p-5 bg-white rounded-md shadow-md gap-2">
       <h1 className="text-lg font-semibold">Main Details</h1>
       <div className="flex flex-col gap-1">
         <p className="text-sm font-semibold">Title</p>
@@ -32,12 +32,13 @@ export function MainDetailInputCard({
                                     onChange={onChangeTitle}
         />
       </div>
-      <div className="w-full flex flex-row gap-3">
-        <div className="w-[50%] flex flex-col gap-1">
+      <div className="w-full flex flex-row gap-3 
+      max-sm:flex-col">
+        <div className="w-[50%] max-sm:w-full flex flex-col gap-1 ">
           <p className="text-sm font-semibold">Venue</p>
           <DefaultInput onChange={onChangeVenue} value={valueVenue}/>
         </div>
-        <div className="w-[50%] flex flex-col gap-1">
+        <div className="w-[50%] max-sm:w-full flex flex-col gap-1">
           <p className="text-sm font-semibold">Organizer</p>
           <DefaultInput onChange={onChangeOrganizer} value={valueOrganizer}/>
         </div>

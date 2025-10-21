@@ -16,12 +16,13 @@ export default function Login() {
   return (
     <div className="w-full h-screen bg-[url(/pics/cheers.jpg)] bg-cover">
       <main className="w-full h-full flex flex-col justify-center items-center">
-        <div className="flex flex-col justify-center items-center w-fit h-fit bg-white/80 px-10 py-15 rounded-lg gap-7 shadow-md">
+        <div className="flex flex-col justify-center items-center w-fit h-fit bg-white/80 px-10 py-15 rounded-lg gap-7 shadow-md
+        max-sm:px-5 max-sm:py-8">
           <div className="flex flex-col gap-2 items-center">
-            <h1 className="font-serif p-0 m-0 text-3xl font-bold">
+            <h1 className="font-serif p-0 m-0 text-3xl text-center font-bold max-sm:text-xl">
               Sign in with Email
             </h1>
-            <p className="text-sm">
+            <p className="text-sm text-center">
               Welcome! Let’s make new memories together.
             </p>
           </div>

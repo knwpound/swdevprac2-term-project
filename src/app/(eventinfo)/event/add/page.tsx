@@ -54,9 +54,10 @@ export  default function AddEventPage() {
           url={url}
         />
       )}
-      <div className="flex flex-row justify-between">
-        <h1 className="text-2xl font-bold font-serif">Add New Event</h1>
-        <div className="flex flex-row gap-3">
+      <div className="flex flex-row justify-between max-sm:flex-col 
+      max-sm:justify-center max-sm:gap-2">
+        <h1 className="text-2xl font-bold font-serif max-sm:text-center">Add New Event</h1>
+        <div className="flex flex-row gap-3 max-sm:justify-center">
           <LightButton text="Cancel" onClick={()=>router.push(`/event`)}/>
           <DefaultButton text="Save" onClick={handleOnSave}/>
         </div>
@@ -83,14 +84,15 @@ export  default function AddEventPage() {
                       </div>
                     </div>
         </div>
-        <div className="flex flex-row gap-5">
+        <div className="flex flex-row max-sm:flex-col gap-5">
           <MainDetailInputCard
             onChangeTitle={(e) => setName(e.target.value)}
             onChangeVenue={(e) => setVenue(e.target.value)}
             onChangeOrganizer={(e) => setOrganizer(e.target.value)}
             onChangeDetail={(e) => setDetail(e.target.value)}
           />
-          <div className="w-[50%] flex flex-col gap-3">
+          <div className="w-[50%] flex flex-col gap-3
+          max-sm:w-full">
             <DateInputCard onChangeDate={(newDate) => setDate(newDate)} onChangeTime={(newTime) => setStartTime(newTime)}/>
             <TicketRangeCard onChange={setTicket} />
           </div>

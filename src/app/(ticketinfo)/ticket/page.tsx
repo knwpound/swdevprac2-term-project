@@ -17,14 +17,14 @@ export default async function Tickets() {
   return (
     <div className="w-full">
       <Banner />
-      <div className="w-full px-10 h-[90vh] space-y-8 flex flex-col justify-center">
+      <div className="w-full px-10 py-15 space-y-8 flex flex-col justify-center">
         <div className="flex flex-row justify-between">
           <h1 className="font-serif font-bold text-2xl">My Tickets</h1>
-          <div className="flex flex-row gap-1">
+          <div className="w-[30%] flex flex-row gap-1 justify-end">
           <input
             type="text"
             placeholder="Search"
-            className="w-[300px] bg-gray-200 px-2 rounded-md"
+            className="w-full bg-gray-200 px-2 rounded-md"
           />  
           <Plus size={"30"} strokeWidth={"3"} className="h-full rounded-md p-1 text-gray-500 
           hover:bg-gray-200 hover:text-gray-700 active:text-black active:bg-gray-300 transition duration-150"/>

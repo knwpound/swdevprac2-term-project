@@ -13,7 +13,7 @@ export function EventDetailCard({
 }) {
   return (
     <div className="w-[250px] flex flex-col gap-2 bg-white px-5 py-5 rounded-md shadow-md">
-      <div className="">
+      <div className="flex flex-col">
         <p className="text-md font-bold">Event Date</p>
         <p className="text-sm">{date}</p>
         <p className="text-sm">{time}</p>

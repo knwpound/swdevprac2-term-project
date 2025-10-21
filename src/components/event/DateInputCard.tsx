@@ -22,9 +22,9 @@ export function DateInputCard({
   return (
     <div className="w-full h-full flex flex-col justify-between p-5 bg-white rounded-md shadow-md">
       <h1 className="text-lg font-semibold">Date & Time</h1>
-      <div className="flex flex-row gap-2 items-center justify-center">
+      <div className="flex flex-row max-sm:flex-col gap-2 items-baseline justify-center">
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <div className="w-[50%] flex flex-col gap-1">
+          <div className="w-[50%] max-sm:w-full flex flex-col gap-1">
             <p className="text-sm font-semibold">Select a day</p>
             <DatePicker
               onChange={onChangeDate}
@@ -32,7 +32,7 @@ export function DateInputCard({
               value={dateValue}
             />
           </div>
-          <div className="w-[30%] flex flex-col gap-1">
+          <div className="w-[30%] max-sm:w-full flex flex-col gap-1">
             <p className="text-sm font-semibold">Start time</p>
             <TimePicker
               onChange={onChangeTime}

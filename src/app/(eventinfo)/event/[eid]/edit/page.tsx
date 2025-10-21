@@ -126,9 +126,9 @@ export default function EditEventPage() {
         />
       )}
 
-      <div className="flex flex-row justify-between">
-        <h1 className="text-2xl font-bold font-serif">Edit Event #{id}</h1>
-        <div className="flex flex-row gap-3">
+      <div className="flex flex-row max-sm:flex-col justify-between max-sm:justify-center max-sm:gap-2">
+        <h1 className="text-2xl font-bold font-serif max-sm:text-xl max-sm:text-center">Edit Event #{id}</h1>
+        <div className="flex flex-row gap-3 max-sm:justify-center">
           <LightButton
             text="Delete"
             onClick={() => setShowDeleteModal(!showDeleteModal)}
@@ -158,7 +158,7 @@ export default function EditEventPage() {
             </div>
           </div>
         </div>
-        <div className="flex flex-row gap-5">
+        <div className="flex flex-row gap-5 max-sm:flex-col">
           <MainDetailInputCard
             onChangeTitle={(e) => setName(e.target.value)}
             onChangeVenue={(e) => setVenue(e.target.value)}
@@ -169,7 +169,7 @@ export default function EditEventPage() {
             valueTitle={name}
             valueVenue={venue}
           />
-          <div className="w-[50%] flex flex-col gap-3">
+          <div className="w-[50%] max-sm:w-full flex flex-col gap-3">
             <DateInputCard
               onChangeDate={(newDate) => setDate(newDate)}
               onChangeTime={(newTime) => setStartTime(newTime)}

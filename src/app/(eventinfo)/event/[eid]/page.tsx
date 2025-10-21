@@ -92,8 +92,8 @@ export default function EventDetail({ params }: { params: { eid: string } }) {
           )}
         </div>
       </div>
-      <div className="w-full flex flex-row gap-25 px-5 justify-center pb-15">
-        <div className="w-[50%] flex flex-col gap-3">
+      <div className="w-full flex flex-row max-sm:flex-col gap-25 px-5 justify-center items-center pb-15">
+        <div className="w-[50%] max-sm:w-full flex flex-col gap-3">
           <p className="font-bold text-lg">Description</p>
           <p className="text-sm">{eventDetail.data.description}</p>
           <p className="text-sm">

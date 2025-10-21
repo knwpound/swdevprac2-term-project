@@ -38,12 +38,13 @@ export default function Register() {
   return (
     <div className="w-full h-screen bg-[url(/pics/cheers.jpg)] bg-cover">
       <main className="w-full h-full flex flex-col justify-center items-center">
-        <div className="flex flex-col justify-center items-center w-fit h-fit bg-white/80 px-10 py-15 rounded-lg gap-7 shadow-md">
+        <div className="flex flex-col justify-center items-center w-fit h-fit bg-white/80 px-10 py-15 rounded-lg gap-7 shadow-md
+        max-sm:px-4 max-sm:py-8">
           <div className="flex flex-col gap-2 items-center">
-            <h1 className="font-serif p-0 m-0 text-3xl font-bold">
+            <h1 className="font-serif p-0 m-0 text-3xl font-bold max-sm:text-xl">
               Create an Account
             </h1>
-            <p className="text-sm">
+            <p className="text-sm text-center">
               Ready to book some fun? Log in and let’s go!
             </p>
           </div>
@@ -64,10 +65,10 @@ export default function Register() {
                 placeholder="Email"
                 onChange={(e) => setEmail(e.target.value)}
               />
-              <div className="flex flex-row w-full gap-2">
+              <div className="flex flex-row max-sm:flex-col w-full gap-2">
                 <input
                   type="text"
-                  className="w-[70%] text-black text-sm px-3 py-1.5 placeholder:black border border-1 border-black 
+                  className="w-[70%] max-sm:w-full text-black text-sm px-3 py-1.5 placeholder:black border border-1 border-black 
             rounded-sm focus:outline focus:outline-gray-500"
                   placeholder="Tel"
                   onChange={(e) => setTel(e.target.value)}
