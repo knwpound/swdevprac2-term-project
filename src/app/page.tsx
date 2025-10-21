@@ -9,13 +9,13 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 export default async function Home() {
+  const sortedEvents = getEvents({ page: 1, limit: 4, sort: "asc" });
+  const recentEvents = getEvents({
+    sortBy: "createdAt",
+    sort: "desc",
+    limit: 4,
+  });
   const session = await getServerSession(authOptions);
-  const sortedEvents = await getEvents({ page: 1, limit: 4, sort: "asc" });
-  const recentEvents = await getEvents({
-  sortBy: "createdAt",
-  sort: "desc",
-  limit: 4,
-});
 
   let tickets;
   if (session) {
