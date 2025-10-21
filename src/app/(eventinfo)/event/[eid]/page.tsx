@@ -13,7 +13,7 @@ import { ReservationModal } from "@/components/modal/InputModal";
 import { formatDateTime } from "@/utils/formatDateTime";
 
 export default function EventDetail({ params }: { params: { eid: string } }) {
- const { eid } = params;
+  const { eid } = params;
   // const eventDetail = await getEvent(eid)
   const router = useRouter();
   const { data: session } = useSession();
@@ -73,7 +73,10 @@ export default function EventDetail({ params }: { params: { eid: string } }) {
               <DefaultButton text="Edit" />
             </Link>
           ) : (
-            <DefaultButton text="Reserve" onClick={()=>setReserveModal(!reserveModal)}/>
+            <DefaultButton
+              text="Reserve"
+              onClick={() => setReserveModal(!reserveModal)}
+            />
           )}
         </div>
       </div>
