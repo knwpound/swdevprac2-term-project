@@ -46,7 +46,7 @@ export default function EventDetail({ params }: { params: { eid: string } }) {
         token: session.user.token,
       });
       console.log("Ticket created:", result);
-      alert(`Ticket id ${result._id} is created!`)
+      alert(`Ticket id ${result._id} is created!`);
       router.push(`/ticket`);
     } catch (err) {
       console.error(err);
@@ -80,16 +80,18 @@ export default function EventDetail({ params }: { params: { eid: string } }) {
         </h1>
         <Timer targetDateISO={eventDetail.data.eventDate} />
         <div>
-          {session?.user.role === "admin" ? (
-            <Link href={`/event/${eid}/edit`}>
-              <DefaultButton text="Edit" />
-            </Link>
-          ) : (
-            <DefaultButton
-              text="Reserve"
-              onClick={() => setReserveModal(!reserveModal)}
-            />
-          )}
+          {session ? (
+            session.user.role === "admin" ? (
+              <Link href={`/event/${eid}/edit`}>
+                <DefaultButton text="Edit" />
+              </Link>
+            ) : (
+              <DefaultButton
+                text="Reserve"
+                onClick={() => setReserveModal(!reserveModal)}
+              />
+            )
+          ) : null}
         </div>
       </div>
       <div className="w-full flex flex-row max-sm:flex-col gap-25 px-5 justify-center items-center pb-15">
