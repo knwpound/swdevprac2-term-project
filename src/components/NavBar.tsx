@@ -1,13 +1,13 @@
 "use client";
 
-import { DefaultButton,SecondaryButton } from "./reused/Button";
-import { useRouter,usePathname } from "next/navigation";
+import { DefaultButton, SecondaryButton } from "./reused/Button";
+import { useRouter, usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { NavBarMenu } from "./NavBarMenu";
 
 export default function NavBar() {
-  const pathname = usePathname()
-  if (pathname.startsWith('/auth')) return null
+  const pathname = usePathname();
+  if (pathname.startsWith("/auth")) return null;
 
   const router = useRouter();
   const { data: session } = useSession();
@@ -27,13 +27,15 @@ export default function NavBar() {
         <a className="hover:underline" href="/event">
           Events
         </a>
-         <a className="hover:underline" href="/ticket">
-          Tickets
-        </a>
+        {session ? (
+          <a className="hover:underline" href="/ticket">
+            Tickets
+          </a>
+        ) : null}
       </div>
       {session ? (
         <div>
-          <NavBarMenu/>
+          <NavBarMenu />
         </div>
       ) : (
         <div className="flex flex-row gap-1">
