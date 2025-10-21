@@ -11,17 +11,18 @@ import { MainDetailInputCard } from "@/components/event/MainDetailInputCard";
 import { DateInputCard } from "@/components/event/DateInputCard";
 import { TicketRangeCard } from "@/components/event/TicketRangeCard";
 import { Upload } from "lucide-react";
-import { PicsURLInput,DeleteEventModal } from "@/components/modal/InputModal";
+import Image from "next/image";
+import { PicsURLInput, DeleteEventModal } from "@/components/modal/InputModal";
 
 export default function EditEventPage() {
   const params = useParams();
   const router = useRouter();
-  
+
   const { data: session } = useSession();
   if (!session || !session.user.token) return null;
 
   const id = params.eid as string;
-  
+
   // 1. Get Event Detail
   const [eventDetail, setEventDetail] = useState<any>(null);
 
@@ -99,7 +100,7 @@ export default function EditEventPage() {
     if (!id || !session) return;
 
     try {
-      const result = await deleteEvent(id,session.user.token);
+      const result = await deleteEvent(id, session.user.token);
       console.log("Event deleted:", result);
       router.push(`/event`);
     } catch (err) {
@@ -112,35 +113,44 @@ export default function EditEventPage() {
       {showModal && (
         <PicsURLInput
           onClose={() => setShowModal(false)}
-          onChange={(e: any) => setUrl(e.target.value)}
+          onSave={(newUrl)=>setUrl(newUrl)}
           url={url}
         />
       )}
-      {showDeleteModal&&(
+      {showDeleteModal && (
         <DeleteEventModal
-        onClose={() => setShowDeleteModal(false)}
-        onChange={handleOnDelete}
+          onClose={() => setShowDeleteModal(false)}
+          onChange={handleOnDelete}
         />
       )}
-      
+
       <div className="flex flex-row justify-between">
         <h1 className="text-2xl font-bold font-serif">Edit Event #{id}</h1>
         <div className="flex flex-row gap-3">
-          <LightButton text="Delete" onClick={()=>setShowDeleteModal(!showDeleteModal)}/>
+          <LightButton
+            text="Delete"
+            onClick={() => setShowDeleteModal(!showDeleteModal)}
+          />
           <DefaultButton text="Save" onClick={handleOnSave} />
         </div>
       </div>
       <div className="w-full flex flex-col gap-5">
         <div className="w-full flex flex-col gap-3 bg-white shadow-md p-5 rounded-md shadow-md">
           <p className="text-lg font-semibold">Thumbnail</p>
-          <div className="w-full h-[300px] flex flex-col gap-2 items-center justify-center bg-gray-200 rounded-md ">
+          <div className="w-full h-[300px] relative flex flex-col items-center justify-center bg-gray-200 rounded-md overflow-hidden">
+            {/* Background image */}
+            <Image src={url} alt="" fill className="object-cover" />
+
+            {/* Upload button */}
             <div
-              className="bg-white p-2 rounded-md hover:bg-black hover:text-white transition duration-250 cursor-pointer"
-              onClick={(e) => setShowModal(true)}
+              className="z-10 bg-white p-2 rounded-md hover:bg-black hover:text-white transition duration-200 cursor-pointer"
+              onClick={() => setShowModal(true)}
             >
-              <Upload size={"30"} className="hover:text-white" />
+              <Upload size={30} />
             </div>
-            <div className="text-center hover:text-slate-600 cursor-pointer">
+
+            {/* Text */}
+            <div className="z-10 text-center mt-2 hover:text-slate-600 cursor-pointer">
               <h1 className="font-semibold">Click Here to Add Photo Path</h1>
               <p className="text-sm">Ex. "https://google.drive.com"</p>
             </div>

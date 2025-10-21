@@ -5,14 +5,16 @@ import { useState } from "react";
 
 export function PicsURLInput({
   onClose,
-  onChange,
+  onSave,
   url,
 }: {
   onClose: () => void;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onSave: (newUrl: string) => void;
   url: string;
 }) {
+  const [picSrc, setPicSrc] = useState(url);
   const handleSave = () => {
+    onSave(picSrc);
     onClose();
   };
   return (
@@ -25,7 +27,12 @@ export function PicsURLInput({
           </p>
         </div>
         <div className="w-full gap-2 flex flex-row">
-          <DefaultInput onChange={onChange} value={url} />
+          <DefaultInput
+            value={picSrc}
+            onChange={(e) => {
+              setPicSrc(e.target.value);
+            }}
+          />
           <DefaultButton text="Save" onClick={handleSave} />
         </div>
       </div>
