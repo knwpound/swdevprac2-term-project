@@ -1,38 +1,62 @@
-import Image from "next/image";
-import { MapPin, Clock } from "lucide-react";
-import { Banner } from "@/components/Banner";
+import { Banner, LightBanner } from "@/components/Banner";
 import { CardContainer } from "@/components/CardContainer";
 import { TicketContainer } from "@/components/TicketContainer";
-import { DefaultFooter } from "@/components/Footer";
+import { DefaultFooter, LightFooter } from "@/components/Footer";
+import getEvents from "@/libs/getEvents";
+import getTickets from "@/libs/getTickets";
+import { Suspense } from "react";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
-export default function Home() {
+export default async function Home() {
+  const session = await getServerSession(authOptions);
+  const sortedEvents = await getEvents({ page: 1, limit: 4, sort: "asc" });
+  const recentEvents = await getEvents({
+  sortBy: "createdAt",
+  sort: "desc",
+  limit: 4,
+});
+
+  let tickets;
+  if (session) {
+    tickets = await getTickets(session.user.token);
+  }
+
   return (
     <div className="font-sans">
       <main className="w-full">
-        <Banner></Banner>
+        <LightBanner />
         <div className="w-full px-10 h-[90vh] space-y-8 flex flex-col justify-center">
           <div className="flex flex-row justify-between">
-            <h1 className="font-serif font-bold text-2xl">Recommend Event</h1>
+            <h1 className="font-serif font-bold text-2xl">Newest Event</h1>
             <input
               type="text"
               placeholder="Search"
               className="w-[300px] bg-gray-200 px-2 rounded-md"
             />
           </div>
-          <CardContainer />
+          <Suspense fallback={<div>Loading...</div>}>
+            <CardContainer eventJson={recentEvents} />
+          </Suspense>
         </div>
-        <div className="w-full h-screen bg-[#F7EBD3] py-15 flex flex-col items-center justify-center gap-10">
-          <h1 className="font-serif font-bold text-2xl">My Tickets</h1>
-          <TicketContainer />
-        </div>
+        {session ? (
+          <div className="w-full h-screen bg-[#F7EBD3] py-15 flex flex-col items-center justify-center gap-10">
+            <h1 className="font-serif font-bold text-2xl">My Tickets</h1>
+            <Suspense fallback={<div>Tickets Loading...</div>}>
+              <TicketContainer ticketJson={tickets} />
+            </Suspense>
+          </div>
+        ) : null}
         <div className="w-full px-10 h-[90vh] space-y-8 flex flex-col justify-center">
           <div className="flex flex-row justify-between">
             <h1 className="font-serif font-bold text-2xl">Upcoming Events</h1>
           </div>
-          <CardContainer />
+          <Suspense fallback={<div>Loading...</div>}>
+            <CardContainer eventJson={sortedEvents} />
+          </Suspense>
         </div>
       </main>
-      <DefaultFooter/>
+      <LightFooter />
     </div>
   );
 }

@@ -3,6 +3,7 @@ interface GetEventsParams {
   page?: number;
   limit?: number;
   sort?: "asc" | "desc";
+  sortBy?: string;
 }
 
 export default async function getEvents({
@@ -10,6 +11,7 @@ export default async function getEvents({
   page = 1,
   limit = 10,
   sort = "asc",
+  sortBy,
 }: GetEventsParams = {}) {
   // simulate delay
   await new Promise((r) => setTimeout(r, 5000));
@@ -21,6 +23,7 @@ export default async function getEvents({
     params.append("page", page.toString());
     params.append("limit", limit.toString());
     params.append("sort", sort);
+    if (sortBy) params.append("sortBy", sortBy);
 
     const response = await fetch(`http://localhost:5000/api/v1/events?${params.toString()}`, {
       cache: "no-store",
