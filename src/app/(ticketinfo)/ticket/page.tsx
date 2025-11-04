@@ -26,8 +26,7 @@ export default async function Tickets() {
             placeholder="Search"
             className="w-full bg-gray-200 px-2 rounded-md"
           />  
-          <Plus size={"30"} strokeWidth={"3"} className="h-full rounded-md p-1 text-gray-500 
-          hover:bg-gray-200 hover:text-gray-700 active:text-black active:bg-gray-300 transition duration-150"/>
+          
           </div>
           
         </div>
