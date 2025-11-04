@@ -35,7 +35,7 @@ export default function NavBar() {
       </div>
       {session ? (
         <div className="max-sm:absolute max-sm:right-3">
-          <NavBarMenu />
+          <NavBarMenu name={session.user.name} role={session.user.role}/>
         </div>
       ) : (
         <div className="flex flex-row gap-1 max-sm:flex-col">
