@@ -79,7 +79,7 @@ export default function TicketDetail({
       )}
       <div className="relative w-[50%] max-sm:w-full h-[400px] shadow-md">
         <Image
-          src={ticket.event.posterPicture}
+          src={ticket.event.posterPicture || "/pics/banner1.png"}
           alt=""
           fill
           className="object-cover rounded-lg"

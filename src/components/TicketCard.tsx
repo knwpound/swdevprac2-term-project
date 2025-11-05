@@ -8,7 +8,7 @@ export function TicketCard({name,date,amount,picSrc}:{name:string,date:string,am
     hover:shadow-lg transition duration-150">
       <div className="relative w-full h-[60%]">
         <Image
-          src={picSrc}
+          src={picSrc || "/pics/banner1.png"}
           alt=""
           fill
           className="object-cover rounded-t-lg"
