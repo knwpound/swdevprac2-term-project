@@ -1,5 +1,6 @@
 "use client"
 import { useState } from "react";
+import { useSession } from "next-auth/react";
 import dayjs, {Dayjs} from "dayjs";
 import { DefaultButton, LightButton } from "@/components/reused/Button";
 import { MainDetailInputCard } from "@/components/event/MainDetailInputCard";
@@ -22,6 +23,9 @@ export  default function AddEventPage() {
   const [ticket, setTicket] = useState(0);
   const [url, setUrl] = useState("");
   const router = useRouter();
+  const { data: session } = useSession();
+  
+  if (!session) return null
 
   async function handleOnSave() {
     if (!name||!date||!venue||!organizer||!ticket){
