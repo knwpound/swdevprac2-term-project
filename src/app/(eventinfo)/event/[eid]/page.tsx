@@ -5,16 +5,12 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import getEvent from "@/libs/getEvent";
-import getEvents from "@/libs/getEvents";
 import createTicket from "@/libs/postTicket";
 import { DefaultButton } from "@/components/reused/Button";
 import { Timer } from "@/components/event/Timer";
 import { DefaultFooter } from "@/components/Footer";
 import { EventDetailCard } from "@/components/EventDetailCard";
 import { ReservationModal } from "@/components/modal/InputModal";
-import { CardContainer } from "@/components/CardContainer";
-import { Suspense } from "react";
-import { SkeletonContainer } from "@/components/SkeletonContainer";
 import { formatDateTime } from "@/utils/formatDateTime";
 
 export default function EventDetail({ params }: { params: { eid: string } }) {
