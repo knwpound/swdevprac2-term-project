@@ -49,7 +49,7 @@ export default function TicketDetail({
         token: session?.user.token,
       });
       alert("Ticket updated");
-      console.log(result);
+      router.push(`/ticket`);
     } catch (err) {
       console.error(err);
     }
