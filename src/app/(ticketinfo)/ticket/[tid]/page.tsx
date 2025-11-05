@@ -87,7 +87,7 @@ export default function TicketDetail({
       </div>
       <div className="bg-white flex flex-col justify-center px-5 rounded-md gap-5 py-2 shadow-md">
         <div>
-          <h1 className="text-2xl font-semibold">The Phomtom of Opera</h1>
+          <h1 className="text-2xl font-semibold">{ticket.event.name}</h1>
           <p>Ticket id #{ticket?._id.slice(-5)}</p>
         </div>
         <div className="flex flex-col gap-3">
