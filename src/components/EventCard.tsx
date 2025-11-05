@@ -6,7 +6,7 @@ export function EventCard({name,venue,time,picSrc}:{name:string,venue:string,tim
     hover:shadow-lg transition duration-150">
       <div className="relative w-full h-[60%]">
         <Image
-          src={picSrc}
+          src={picSrc||"/pics/banner1.png"}
           alt=""
           fill
           className="object-cover rounded-t-lg"

@@ -56,7 +56,7 @@ export default function EventDetail({ params }: { params: { eid: string } }) {
         flex flex-col justify-center items-center relative`}
       >
         <Image
-          src={eventDetail.data.posterPicture}
+          src={eventDetail.data.posterPicture||"/pics/banner1.png"}
           alt=""
           fill
           className="object-cover rounded-t-lg"

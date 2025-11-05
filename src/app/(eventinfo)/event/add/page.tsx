@@ -89,7 +89,7 @@ export default function AddEventPage() {
           <p className="text-lg font-semibold">Thumbnail</p>
           <div className="w-full h-[300px] relative flex flex-col items-center justify-center bg-gray-200 rounded-md overflow-hidden">
             {/* Background image */}
-            <Image src={url} alt="" fill className="object-cover" />
+            {url && <Image src={url} alt="" fill className="object-cover" />}
 
             {/* Upload button */}
             <div

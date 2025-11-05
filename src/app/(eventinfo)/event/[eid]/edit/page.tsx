@@ -50,7 +50,7 @@ export default function EditEventPage() {
   const [date, setDate] = useState<Dayjs | null>(null);
   const [startTime, setStartTime] = useState<Dayjs | null>(null);
   const [ticket, setTicket] = useState(0);
-  const [url, setUrl] = useState("");
+  const [url, setUrl] = useState("/pics/banner1.png");
 
   // 2. Assign initial value
   useEffect(() => {
@@ -152,8 +152,8 @@ export default function EditEventPage() {
           <p className="text-lg font-semibold">Thumbnail</p>
           <div className="w-full h-[300px] relative flex flex-col items-center justify-center bg-gray-200 rounded-md overflow-hidden">
             {/* Background image */}
-            <Image src={url} alt="" fill className="object-cover" />
-
+            {url && <Image src={url} alt="" fill className="object-cover" />}
+            
             {/* Upload button */}
             <div
               className="z-10 bg-white p-2 rounded-md hover:bg-black hover:text-white transition duration-200 cursor-pointer"
