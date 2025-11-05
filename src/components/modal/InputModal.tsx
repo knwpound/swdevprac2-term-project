@@ -98,16 +98,13 @@ export function ReservationModal({
   onClick: () => void;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) {
-  function handleReservation(){
-    onClose;
-    onClick;
-  }
+  const [value, setValue] = useState("");
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
       <div className="flex flex-col gap-6 bg-white rounded-2xl p-6 shadow-lg items-center justify-center">
         <div className="flex flex-col gap-2 items-center justify-center">
           <h2 className="text-xl font-semibold">Confirm Reservation</h2>
-          <p className="text-gray-600">Choose ticket amount from 1-4</p>
+          <p className="text-gray-600">Choose ticket amount from 1-5</p>
         </div>
 
         <div className="w-full gap-2 flex flex-row justify-center">
@@ -115,12 +112,20 @@ export function ReservationModal({
             type="number"
             className="text-center"
             min="1"
-            max="4"
-            placeholder=""
-            onChange={onChange}
+            max="5"
+            placeholder="1"
+            onChange={(e) => {
+              onChange(e);
+              setValue(e.target.value);
+            }}
+            value={value}
           ></DefaultInput>
           <SecondaryButton text="Cancel" onClick={onClose} />
-          <DefaultButton text="Reserve" onClick={onClick} />
+          <DefaultButton
+            text="Reserve"
+            onClick={onClick}
+            disabled={value === ""}
+          />
         </div>
       </div>
     </div>
