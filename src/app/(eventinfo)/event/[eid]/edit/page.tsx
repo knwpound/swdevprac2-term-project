@@ -76,20 +76,29 @@ export default function EditEventPage() {
   // Call Update Event API
   async function handleOnSave() {
     if (!date) return;
+    let combinedEventDate = date;
+    if (startTime) {
+      combinedEventDate = combinedEventDate.set("hour", startTime.hour()).set("minute", startTime.minute());
+    }
+
+    if (combinedEventDate.isBefore(dayjs())) {
+      alert("The event date and time cannot be in the past!");
+      return;
+    }
 
     try {
       const result = await updateEvent({
         eid: id,
         name,
         description: detail,
-        eventDate: date,
+        eventDate: combinedEventDate,
         venue,
         organizer,
         availableTicket: ticket,
         posterPicture: url,
       });
       console.log("Event updated:", result);
-      alert(`Event ${id} updated`)
+      alert(`Event ${id} updated`);
       router.push(`/event/${id}`);
     } catch (err) {
       console.error(err);
@@ -103,7 +112,7 @@ export default function EditEventPage() {
     try {
       const result = await deleteEvent(id, session.user.token);
       console.log("Event deleted:", result);
-      alert(`Event ${id} deleted`)
+      alert(`Event ${id} deleted`);
       router.push(`/event`);
     } catch (err) {
       console.error(err);
@@ -115,7 +124,7 @@ export default function EditEventPage() {
       {showModal && (
         <PicsURLInput
           onClose={() => setShowModal(false)}
-          onSave={(newUrl)=>setUrl(newUrl)}
+          onSave={(newUrl) => setUrl(newUrl)}
           url={url}
         />
       )}
@@ -127,7 +136,9 @@ export default function EditEventPage() {
       )}
 
       <div className="flex flex-row max-sm:flex-col justify-between max-sm:justify-center max-sm:gap-2">
-        <h1 className="text-2xl font-bold font-serif max-sm:text-xl max-sm:text-center">Edit Event #{id}</h1>
+        <h1 className="text-2xl font-bold font-serif max-sm:text-xl max-sm:text-center">
+          Edit Event #{id}
+        </h1>
         <div className="flex flex-row gap-3 max-sm:justify-center">
           <LightButton
             text="Delete"

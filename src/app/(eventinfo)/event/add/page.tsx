@@ -39,7 +39,11 @@ export default function AddEventPage() {
       combinedEventDate
         .set("hour", startTime.hour())
         .set("minute", startTime.minute())
-        .set("second", startTime.second());
+    }
+
+    if (combinedEventDate.isBefore(dayjs())) { // หรือ dayjs()
+        alert("The event date and time cannot be in the past!");
+        return; 
     }
 
     try {
