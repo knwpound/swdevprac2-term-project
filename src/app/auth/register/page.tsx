@@ -27,7 +27,7 @@ export default function Register() {
 
     try {
       await userRegister({ name, email, tel, role, password });
-      router.push("/auth/login");
+      router.push("/api/auth/signin");
     } catch (err: any) {
       setError(err.message || "Failed to register");
     } finally {

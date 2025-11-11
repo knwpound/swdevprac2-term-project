@@ -4,6 +4,7 @@ import { DefaultButton, SecondaryButton } from "./reused/Button";
 import { useRouter, usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { NavBarMenu } from "./NavBarMenu";
+import { Session } from "inspector/promises";
 
 export default function NavBar() {
   const pathname = usePathname();
@@ -11,6 +12,7 @@ export default function NavBar() {
 
   const router = useRouter();
   const { data: session } = useSession();
+  console.log(session)
   return (
     <div
       data-aos="fade-up"
@@ -48,7 +50,7 @@ export default function NavBar() {
           <DefaultButton
             text="Login"
             onClick={() => {
-              router.push("/auth/login");
+              router.push("/api/auth/signin");
             }}
           />
         </div>
