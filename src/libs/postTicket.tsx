@@ -7,7 +7,7 @@ export default async function createTicket({
   ticketAmount: number;
   token: string;
 }) {
-  const response = await fetch("http://localhost:5000/api/v1/ticketing", {
+  const response = await fetch(`${process.env.BACKEND_URL}/api/v1/ticketing`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

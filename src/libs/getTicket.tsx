@@ -1,5 +1,5 @@
 export default async function getTicket(id:string,token:string) {
-    const response = await fetch(`http://localhost:5000/api/v1/ticketing/${id}`,{
+    const response = await fetch(`${process.env.BACKEND_URL}/api/v1/ticketing/${id}`,{
         method: "GET",
         headers:{
             authorization: `Bearer ${token}`,

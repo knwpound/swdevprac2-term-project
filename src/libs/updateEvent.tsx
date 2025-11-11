@@ -28,7 +28,7 @@ export default async function updateEvent({
   // Log session details for debugging
   // console.log("Session Details:", session);
 
-  const response = await fetch(`http://localhost:5000/api/v1/events/${eid}`, {
+  const response = await fetch(`${process.env.BACKEND_URL}/api/v1/events/${eid}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
