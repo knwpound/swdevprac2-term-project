@@ -86,7 +86,7 @@ export default function Login() {
             <p className="text-sm">Don't have an account?</p>
             <a
               className="text-sm font-semibold hover:underline active:font-bold cursor-pointer transition duration-150"
-              href="/auth/register"
+              href="/api/auth/register"
             >
               Register
             </a>
