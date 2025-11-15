@@ -26,7 +26,7 @@ export function NavBarMenu({name,role}:{name:string,role:string}) {
         <div
           className="hover:bg-slate-200 px-5 py-1 font-medium active:bg-slate-300 cursor-pointer
             transition duration-270"
-            onClick={() => signOut({ callbackUrl: "/auth/login" })}
+            onClick={() => signOut({ callbackUrl: "/api/auth/signin" })}
         >
           Logout
         </div>

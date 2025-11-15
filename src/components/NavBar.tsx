@@ -8,6 +8,7 @@ import { Session } from "inspector/promises";
 
 export default function NavBar() {
   const pathname = usePathname();
+  if (pathname.startsWith("/api/auth")) return null;
   if (pathname.startsWith("/auth")) return null;
 
   const router = useRouter();

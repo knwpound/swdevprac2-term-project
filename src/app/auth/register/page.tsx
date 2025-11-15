@@ -118,7 +118,7 @@ export default function Register() {
             <p className="text-sm">Already have an account?</p>
             <a
               className="text-sm font-semibold hover:underline active:font-bold cursor-pointer"
-              href="/auth/login"
+              href="/api/auth/signin"
             >
               Login
             </a>
