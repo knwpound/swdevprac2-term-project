@@ -94,7 +94,7 @@ export default function TicketDetail({
           <div className="flex flex-col gap-1">
             <p className="text-xs text-gray-500 font-semibold">Name</p>
             <DefaultInput
-              value={ticket.user.name || ""}
+              value={ticket.user.name || session?.user.name}
               disabled={true}
             ></DefaultInput>
           </div>
