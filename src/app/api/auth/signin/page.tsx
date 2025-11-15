@@ -1,6 +1,7 @@
 "use client";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
+import Image from "next/image";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -31,7 +32,14 @@ export default function Login() {
   };
  
   return (
-    <div className="w-full h-screen bg-[url(/pics/cheers.jpg)] bg-cover">
+    <div className="w-full h-screen">
+      <Image
+        src="/pics/cheers.jpg" 
+        alt="Background Cheers"   
+        quality={100}          
+        className="object-cover absolute z-[-1]"
+        fill
+      />
       <main className="w-full h-full flex flex-col justify-center items-center">
         <div
           className="flex flex-col justify-center items-center w-fit h-fit bg-white/80 px-10 py-15 rounded-lg gap-7 shadow-md
