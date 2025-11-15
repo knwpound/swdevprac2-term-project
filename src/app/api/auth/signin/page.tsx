@@ -32,18 +32,29 @@ export default function Login() {
   };
  
   return (
-    <div className="w-full h-screen">
-      <Image
-        src="/pics/cheers.jpg" 
-        alt="Background Cheers"   
-        quality={100}          
-        className="object-cover absolute z-[-1]"
-        fill
-      />
-      <main className="w-full h-full flex flex-col justify-center items-center">
+    <div className="w-full h-screen overflow-hidden">
+      
+      <main className="w-full h-full flex flex-col justify-center items-center overflow-hidden">
         <div
-          className="flex flex-col justify-center items-center w-fit h-fit bg-white/80 px-10 py-15 rounded-lg gap-7 shadow-md
-        max-sm:px-5 max-sm:py-8"
+        className="absolute inset-0 animate-pulseCircle1"
+        style={{
+          background:
+            "radial-gradient(circle at 50% 40%, #EECE7B, transparent, transparent)",
+          zIndex: 10,
+        }}
+      ></div>
+
+      <div
+        className="absolute inset-0 animate-pulseCircle2"
+        style={{
+          background:
+            "radial-gradient(circle at 30% 40%, #FF8D4B, #ffff, #ffff)",
+          zIndex: 10,
+        }}
+      ></div>
+        <div
+          className="flex flex-col justify-center items-center w-fit h-fit bg-white/90 px-10 py-15 rounded-lg gap-7 shadow-md
+        max-sm:px-5 max-sm:py-8 z-30"
         >
           <div className="flex flex-col gap-2 items-center">
             <h1 className="font-serif p-0 m-0 text-3xl text-center font-bold max-sm:text-xl">

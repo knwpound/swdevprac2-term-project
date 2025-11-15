@@ -124,3 +124,21 @@
     @apply font-sans;
   }
 }
+
+@keyframes pulseCircle1 {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
+
+@keyframes pulseCircle2 {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 1; }
+}
+
+.animate-pulseCircle1 {
+  animation: pulseCircle1 5s ease-in-out infinite;
+}
+
+.animate-pulseCircle2 {
+  animation: pulseCircle2 5s ease-in-out infinite;
+}
