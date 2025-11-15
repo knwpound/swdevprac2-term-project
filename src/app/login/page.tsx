@@ -18,7 +18,6 @@ export default function Login() {
     const response = await signIn("credentials", {
       email,
       password,
-      callbackUrl: "/",
       redirect: false,
     });
 
