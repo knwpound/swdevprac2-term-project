@@ -37,7 +37,7 @@ export default function Register() {
 
   return (
     <div className="w-full h-screen overflow-hidden">
-      <main className="w-full h-screen flex flex-col justify-center items-center z-30 overflow-hidden">
+      <main className="w-full h-screen flex flex-col justify-center items-center z-30 overflow-hidden pt-10">
         <div
         className="absolute inset-0 animate-pulseCircle1"
         style={{
@@ -55,14 +55,14 @@ export default function Register() {
           zIndex: 10,
         }}
       ></div>
-        <div className="flex flex-col justify-center items-center w-fit h-fit bg-white/90 px-10 py-15 rounded-lg gap-7 shadow-md
+        <div className="flex flex-col justify-center items-center w-fit h-fit bg-white/90 px-10 py-8 rounded-lg gap-5 shadow-md
         max-sm:px-4 max-sm:py-8 z-30">
           <div className="flex flex-col gap-2 items-center">
             <h1 className="font-serif p-0 m-0 text-3xl font-bold max-sm:text-xl">
               Create an Account
             </h1>
             <p className="text-sm text-center">
-              Ready to book some fun? Log in and let’s go!
+              Your next unforgettable experience starts here
             </p>
           </div>
 
