@@ -19,7 +19,7 @@ export default async function Tickets() {
       <Banner />
       <div className="w-full px-10 py-15 space-y-8 flex flex-col justify-center">
         <div className="flex flex-row justify-between">
-          <h1 className="font-serif font-bold text-2xl">My Tickets</h1>
+          <h1 className="font-serif font-bold text-2xl">{session.user.role==="admin"?"Tickets":"My Tickets"}</h1>
           <div className="w-[30%] flex flex-row gap-1 justify-end">
           </div>
           

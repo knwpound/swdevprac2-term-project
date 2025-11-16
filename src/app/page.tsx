@@ -38,7 +38,7 @@ export default async function Home() {
         </div>
         {session ? (
           <div className="w-full bg-[#F7EBD3] py-15 flex flex-col items-center justify-center gap-10">
-            <h1 className="font-serif font-bold text-2xl">My Tickets</h1>
+            <h1 className="font-serif font-bold text-2xl">{session.user.role==="admin"?"Tickets":"My Tickets"}</h1>
             <Suspense fallback={<div>Tickets Loading...</div>}>
               <TicketContainer ticketJson={tickets} />
             </Suspense>

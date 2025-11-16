@@ -18,7 +18,7 @@ export default async function Events() {
       <div className="w-full mt-10 px-10 space-y-8 flex flex-col justify-center">
         <div className="flex flex-row justify-between">
           <h1 className="font-serif font-bold text-2xl">Events</h1>
-          <div className="w-[30%] flex flex-row gap-1">
+          <div className="flex flex-row gap-1">
             {session?.user.role === "admin" ? (
               <Link href={"/event/add"}>
                 <Plus
