@@ -1,4 +1,14 @@
+"use client";
 import { DefaultButton, LightButton } from "./reused/Button"
+
+const handleCopy = async (text:string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      alert("copied!");
+    } catch (err) {
+      console.error("error:", err);
+    }
+  };
 
 export function DefaultFooter(){
     return(
@@ -14,7 +24,7 @@ export function DefaultFooter(){
           <p className="text-white text-lg">This website is part of </p>
         <p className="text-white text-lg">2110507 Software Development Practice II</p>
         </div>
-        <LightButton text="Contact"/>
+        <LightButton text="Contact" title="Copy student id" onClick={()=>handleCopy("6530005821")}/>
       </footer>
     )
 }
@@ -33,7 +43,7 @@ export function LightFooter(){
           <p className="text-white text-lg">This website is part of </p>
         <p className="text-white text-lg">2110507 Software Development Practice II</p>
         </div>
-        <DefaultButton text="Contact"/>
+        <DefaultButton text="Contact" title="Copy student id" onClick={()=>handleCopy("6530005821")}/>
       </footer>
     )
 }

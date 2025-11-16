@@ -2,9 +2,10 @@ export interface DefaultButtonProps {
   text: string;
   onClick?: () => void;
   disabled?: boolean;
+  title?: string;
 }
 
-export function DefaultButton({ text, onClick, disabled }: DefaultButtonProps) {
+export function DefaultButton({ text, title, onClick, disabled }: DefaultButtonProps) {
   return (
     <button
       onClick={onClick}
@@ -13,6 +14,7 @@ export function DefaultButton({ text, onClick, disabled }: DefaultButtonProps) {
     disabled:hover:text-white disabled:hover:bg-black disabled:hover:outline-none
     transition duration-300 cursor-pointer disabled:opacity-30"
       disabled={disabled}
+      title={title}
     >
       {text}
     </button>
@@ -32,12 +34,13 @@ export function SecondaryButton({ text, onClick, disabled }: DefaultButtonProps)
   );
 }
 
-export function LightButton({ text, onClick }: DefaultButtonProps) {
+export function LightButton({ text, title, onClick }: DefaultButtonProps) {
   return (
     <button
       className="font-semibold px-4 py-1 rounded-md bg-slate-100
         hover:bg-slate-300 transition duration-300 cursor-pointer"
       onClick={onClick}
+      title={title}
     >
       {text}
     </button>
