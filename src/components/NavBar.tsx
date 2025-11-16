@@ -8,8 +8,7 @@ import { Session } from "inspector/promises";
 
 export default function NavBar() {
   const pathname = usePathname();
-  if (pathname.startsWith("/api/auth")) return null;
-  if (pathname.startsWith("/auth")) return null;
+  if (pathname === "/signin") return null;
 
   const router = useRouter();
   const { data: session } = useSession();
@@ -45,13 +44,13 @@ export default function NavBar() {
           <SecondaryButton
             text="Sign up"
             onClick={() => {
-              router.push("/auth/register");
+              router.push("/register");
             }}
           />
           <DefaultButton
             text="Login"
             onClick={() => {
-              router.push("/api/auth/signin");
+              router.push("/signin");
             }}
           />
         </div>
