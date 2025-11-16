@@ -21,20 +21,13 @@ export default async function Tickets() {
         <div className="flex flex-row justify-between">
           <h1 className="font-serif font-bold text-2xl">My Tickets</h1>
           <div className="w-[30%] flex flex-row gap-1 justify-end">
-          <input
-            type="text"
-            placeholder="Search"
-            className="w-full bg-gray-200 px-2 rounded-md"
-          />  
-          
           </div>
           
         </div>
         <Suspense fallback={<SkeletonContainer/>}>
           <TicketContainer ticketJson={tickets}/>
         </Suspense>
-       
-        <Pagination/>
+      
       </div>
       
     </div>

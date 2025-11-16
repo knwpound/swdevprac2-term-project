@@ -19,11 +19,6 @@ export default async function Events() {
         <div className="flex flex-row justify-between">
           <h1 className="font-serif font-bold text-2xl">Events</h1>
           <div className="w-[30%] flex flex-row gap-1">
-            <input
-              type="text"
-              placeholder="Search"
-              className="w-full bg-gray-200 px-2 rounded-md"
-            />
             {session?.user.role === "admin" ? (
               <Link href={"/event/add"}>
                 <Plus
@@ -41,7 +36,6 @@ export default async function Events() {
         <Suspense fallback={<SkeletonContainer/>}>
           <CardContainer eventJson={events} />
         </Suspense>
-        <Pagination />
       </div>
     </div>
   );
