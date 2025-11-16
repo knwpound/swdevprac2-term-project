@@ -12,7 +12,7 @@ export default function NavBar() {
 
   const router = useRouter();
   const { data: session } = useSession();
-  console.log(session)
+  
   return (
     <div
       data-aos="fade-up"
@@ -44,13 +44,13 @@ export default function NavBar() {
           <SecondaryButton
             text="Sign up"
             onClick={() => {
-              router.push("/register");
+              router.push("/api/auth/register");
             }}
           />
           <DefaultButton
             text="Login"
             onClick={() => {
-              router.push("/signin");
+              router.push("/api/auth/signin");
             }}
           />
         </div>
