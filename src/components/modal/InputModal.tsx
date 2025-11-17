@@ -93,10 +93,12 @@ export function ReservationModal({
   onClose,
   onClick,
   onChange,
+  loading,
 }: {
   onClose: () => void;
   onClick: () => void;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  loading: boolean;
 }) {
   const [value, setValue] = useState("");
   return (
@@ -119,12 +121,17 @@ export function ReservationModal({
               setValue(e.target.value);
             }}
             value={value}
+            disabled={loading}
           ></DefaultInput>
-          <SecondaryButton text="Cancel" onClick={onClose} />
+          <SecondaryButton
+            text="Cancel"
+            onClick={onClose}
+            disabled={value === "" || loading}
+          />
           <DefaultButton
-            text="Reserve"
+            text={loading ? "Reserving..." : "Reserve"}
             onClick={onClick}
-            disabled={value === ""}
+            disabled={value === "" || loading}
           />
         </div>
       </div>

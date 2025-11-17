@@ -21,6 +21,7 @@ export default function EventDetail({ params }: { params: { eid: string } }) {
   const [eventDetail, setEventDetail] = useState<any>(null);
   const [reserveModal, setReserveModal] = useState(false);
   const [ticketAmount, setTicketAmount] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function fetchEvent() {
@@ -35,12 +36,16 @@ export default function EventDetail({ params }: { params: { eid: string } }) {
 
   async function handleReservation() {
     if (!session) return;
+    setLoading(true);
     try {
       const result = await createTicket({
         event: eid,
         ticketAmount: ticketAmount,
         token: session.user.token,
       });
+
+      setLoading(false);
+
       console.log("Ticket created:", result);
       alert(`Ticket id ${result._id} is created!`);
       router.push(`/ticket`);
@@ -67,6 +72,7 @@ export default function EventDetail({ params }: { params: { eid: string } }) {
           onClose={() => setReserveModal(!reserveModal)}
           onChange={(e: any) => setTicketAmount(e.target.value)}
           onClick={handleReservation}
+          loading={loading}
         />
       ) : null}
 
