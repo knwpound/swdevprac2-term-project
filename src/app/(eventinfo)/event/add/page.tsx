@@ -34,14 +34,12 @@ export default function AddEventPage() {
       );
       return;
     }
-    const combinedEventDate = date
+    let combinedEventDate = date
     if (startTime) {
-      combinedEventDate
-        .set("hour", startTime.hour())
-        .set("minute", startTime.minute())
+      combinedEventDate = combinedEventDate.set("hour", startTime.hour()).set("minute", startTime.minute());
     }
 
-    if (combinedEventDate.isBefore(dayjs())) { // หรือ dayjs()
+    if (combinedEventDate.isBefore(dayjs())) {
         alert("The event date and time cannot be in the past!");
         return; 
     }
