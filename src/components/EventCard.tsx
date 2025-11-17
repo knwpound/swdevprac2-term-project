@@ -17,7 +17,7 @@ export function EventCard({name,venue,time,picSrc}:{name:string,venue:string,tim
           {name}
         </h1>
         <div className="flex flex-col gap-1">
-          <div className="flex flex-row gap-1 items-center">
+          <div className="flex flex-row gap-1 ">
             <MapPin
               color="rgba(71, 71, 71, 0.27)"
               size={"16"}
