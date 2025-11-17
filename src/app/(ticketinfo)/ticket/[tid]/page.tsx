@@ -82,6 +82,7 @@ export default function TicketDetail({
         <DeleteEventModal
           onClose={() => setShowModal(false)}
           onChange={handleOnDelete}
+          loading={loading}
         />
       )}
       <div className="relative w-[50%] max-sm:w-full h-[400px] shadow-md">
