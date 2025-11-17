@@ -25,7 +25,7 @@ export default function TicketDetail({
   const [eventDate, setEventDate] = useState("");
   const [disabled, setDisabled] = useState(true);
   const [showModal, setShowModal] = useState(false);
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function fetchTicket() {
@@ -52,7 +52,7 @@ export default function TicketDetail({
       setDisabled(true);
       setLoading(false);
       alert("Ticket updated");
-      
+
       router.push(`/ticket`);
     } catch (err) {
       console.error(err);
@@ -62,9 +62,12 @@ export default function TicketDetail({
   // Call Delete Event API
   async function handleOnDelete() {
     if (!tid || !session) return;
+    setLoading(true);
 
     try {
       const result = await deleteTicket(tid, session.user.token);
+
+      setLoading(false);
       alert("Ticket deleted");
       console.log("Ticket deleted:", result);
       router.push(`/ticket`);
@@ -123,16 +126,29 @@ export default function TicketDetail({
         <div className="w-full flex flex-row items-end gap-3 justify-end">
           {disabled ? (
             <div className="w-full flex flex-row items-end gap-3 justify-end">
-              <LightButton text="Delete" onClick={() => setShowModal(true)} />
+              <LightButton
+                text={loading ? "Deleting..." : "Delete"}
+                onClick={() => setShowModal(true)}
+                disabled={loading}
+              />
               <DefaultButton
                 text="Edit"
                 onClick={() => setDisabled(!disabled)}
+                disabled={loading}
               />
             </div>
           ) : (
             <div className="w-full flex flex-row items-end gap-3 justify-end">
-              <LightButton text="Cancel" onClick={() => setDisabled(true)} />
-              <DefaultButton text={loading?"Saving...":"Save"} onClick={handleOnSave} disabled={loading}/>
+              <LightButton
+                text="Cancel"
+                onClick={() => setDisabled(true)}
+                disabled={loading}
+              />
+              <DefaultButton
+                text={loading ? "Saving..." : "Save"}
+                onClick={handleOnSave}
+                disabled={loading}
+              />
             </div>
           )}
         </div>
