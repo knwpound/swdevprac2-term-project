@@ -14,6 +14,7 @@ import { useRouter } from "next/navigation";
 
 export default function AddEventPage() {
   const [showModal, setShowModal] = useState(false);
+  const [loading,setLoading] = useState(false);
   const [name, setName] = useState("");
   const [venue, setVenue] = useState("");
   const [organizer, setOrganizer] = useState("");
@@ -34,15 +35,17 @@ export default function AddEventPage() {
       );
       return;
     }
-    let combinedEventDate = date
+    let combinedEventDate = date;
     if (startTime) {
       combinedEventDate = combinedEventDate.set("hour", startTime.hour()).set("minute", startTime.minute());
     }
 
     if (combinedEventDate.isBefore(dayjs())) {
-        alert("The event date and time cannot be in the past!");
-        return; 
+      alert("The event date and time cannot be in the past!");
+      return;
     }
+
+    setLoading(true);
 
     try {
       const result = await createEvent({
@@ -54,6 +57,8 @@ export default function AddEventPage() {
         availableTicket: ticket,
         posterPicture: url,
       });
+
+      setLoading(false);
       console.log("Event created:", result);
       router.push(`/event/${result.data._id}`);
     } catch (err) {
@@ -78,8 +83,8 @@ export default function AddEventPage() {
           Add New Event
         </h1>
         <div className="flex flex-row gap-3 max-sm:justify-center">
-          <LightButton text="Cancel" onClick={() => router.push(`/event`)} />
-          <DefaultButton text="Save" onClick={handleOnSave} />
+          <LightButton text="Cancel" onClick={() => router.push(`/event`)} disabled={loading}/>
+          <DefaultButton text={loading?"Creating...":"Save"} onClick={handleOnSave} disabled={loading}/>
         </div>
       </div>
       <div className="w-full flex flex-col gap-5">
