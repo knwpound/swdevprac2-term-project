@@ -25,6 +25,7 @@ export default function TicketDetail({
   const [eventDate, setEventDate] = useState("");
   const [disabled, setDisabled] = useState(true);
   const [showModal, setShowModal] = useState(false);
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     async function fetchTicket() {
@@ -40,7 +41,7 @@ export default function TicketDetail({
 
   async function handleOnSave() {
     if (!tid || !session) return;
-    setDisabled(true);
+    setLoading(true);
 
     try {
       const result = await updateTicket({
@@ -48,7 +49,10 @@ export default function TicketDetail({
         ticketAmount: totalTicket,
         token: session?.user.token,
       });
+      setDisabled(true);
+      setLoading(false);
       alert("Ticket updated");
+      
       router.push(`/ticket`);
     } catch (err) {
       console.error(err);
@@ -128,7 +132,7 @@ export default function TicketDetail({
           ) : (
             <div className="w-full flex flex-row items-end gap-3 justify-end">
               <LightButton text="Cancel" onClick={() => setDisabled(true)} />
-              <DefaultButton text="Save" onClick={handleOnSave} />
+              <DefaultButton text={loading?"Saving...":"Save"} onClick={handleOnSave} disabled={loading}/>
             </div>
           )}
         </div>
