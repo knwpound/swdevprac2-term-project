@@ -49,9 +49,11 @@ export function PicsURLInput({
 export function DeleteEventModal({
   onClose,
   onChange,
+  loading,
 }: {
   onClose: () => void;
   onChange: () => void;
+  loading: boolean;
 }) {
   const [inputValue, setInputValue] = useState("");
 
@@ -79,9 +81,9 @@ export function DeleteEventModal({
           />
           <SecondaryButton text="Cancel" onClick={onClose} />
           <DefaultButton
-            text="Delete"
+            text={loading?"Deleting":"Delete"}
             onClick={handleDelete}
-            disabled={inputValue !== "Delete me"}
+            disabled={inputValue !== "Delete me" ||loading}
           />
         </div>
       </div>

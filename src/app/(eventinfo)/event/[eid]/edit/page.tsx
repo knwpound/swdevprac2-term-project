@@ -42,6 +42,9 @@ export default function EditEventPage() {
   const [showModal, setShowModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
+  const [loading, setLoading] = useState(false);
+  const [deletedLoading, setDeletedLoading] = useState(false);
+
   // Event detail state
   const [name, setName] = useState("");
   const [venue, setVenue] = useState("");
@@ -54,7 +57,7 @@ export default function EditEventPage() {
 
   // 2. Assign initial value
   useEffect(() => {
-    console.log("eventDetail updated:", eventDetail);
+    
     if (eventDetail) {
       const fullDate = dayjs(eventDetail.eventDate);
 
@@ -86,6 +89,8 @@ export default function EditEventPage() {
       return;
     }
 
+    setLoading(true);
+
     try {
       const result = await updateEvent({
         eid: id,
@@ -97,6 +102,9 @@ export default function EditEventPage() {
         availableTicket: ticket,
         posterPicture: url,
       });
+
+      setLoading(false);
+
       console.log("Event updated:", result);
       alert(`Event ${id} updated`);
       router.push(`/event/${id}`);
@@ -108,9 +116,12 @@ export default function EditEventPage() {
   // Call Delete Event API
   async function handleOnDelete() {
     if (!id || !session) return;
+    setDeletedLoading(true);
 
     try {
       const result = await deleteEvent(id, session.user.token);
+      setDeletedLoading(false);
+
       console.log("Event deleted:", result);
       alert(`Event ${id} deleted`);
       router.push(`/event`);
@@ -132,6 +143,7 @@ export default function EditEventPage() {
         <DeleteEventModal
           onClose={() => setShowDeleteModal(false)}
           onChange={handleOnDelete}
+          loading={deletedLoading}
         />
       )}
 
@@ -141,10 +153,11 @@ export default function EditEventPage() {
         </h1>
         <div className="flex flex-row gap-3 max-sm:justify-center">
           <LightButton
-            text="Delete"
+            text={deletedLoading?"Deleting...":"Delete"}
             onClick={() => setShowDeleteModal(!showDeleteModal)}
+            disabled={loading||deletedLoading}
           />
-          <DefaultButton text="Save" onClick={handleOnSave} />
+          <DefaultButton text={loading?"Saving..":"Save"} onClick={handleOnSave} disabled={loading||deletedLoading}/>
         </div>
       </div>
       <div className="w-full flex flex-col gap-5">
