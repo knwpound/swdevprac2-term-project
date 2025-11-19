@@ -63,6 +63,7 @@ export default function AddEventPage() {
       router.push(`/event/${result.data._id}`);
     } catch (err) {
       console.error(err);
+      setLoading(false);
     }
   }
 

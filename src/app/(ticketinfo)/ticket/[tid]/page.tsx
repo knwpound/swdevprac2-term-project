@@ -56,6 +56,7 @@ export default function TicketDetail({
       router.push(`/ticket`);
     } catch (err) {
       console.error(err);
+      setLoading(false);
     }
   }
 
@@ -73,6 +74,7 @@ export default function TicketDetail({
       router.push(`/ticket`);
     } catch (err) {
       console.error(err);
+      setLoading(false);
     }
   }
   if (!ticket) return;

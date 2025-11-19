@@ -110,6 +110,7 @@ export default function EditEventPage() {
       router.push(`/event/${id}`);
     } catch (err) {
       console.error(err);
+      setLoading(false);
     }
   }
 
@@ -127,6 +128,7 @@ export default function EditEventPage() {
       router.push(`/event`);
     } catch (err) {
       console.error(err);
+      setDeletedLoading(true);
     }
   }
 

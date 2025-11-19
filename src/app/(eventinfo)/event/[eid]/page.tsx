@@ -51,6 +51,7 @@ export default function EventDetail({ params }: { params: { eid: string } }) {
       router.push(`/ticket`);
     } catch (err) {
       console.error(err);
+      setLoading(false);
     }
   }
 
