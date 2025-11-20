@@ -13,8 +13,6 @@ export default async function getEvents({
   sort = "asc",
   sortBy,
 }: GetEventsParams = {}) {
-  // simulate delay
-  await new Promise((r) => setTimeout(r, 5000));
 
   try {
     // สร้าง query string
@@ -25,9 +23,7 @@ export default async function getEvents({
     params.append("sort", sort);
     if (sortBy) params.append("sortBy", sortBy);
 
-    const response = await fetch(`${process.env.BACKEND_URL}/api/v1/events?${params.toString()}`, {
-      cache: "no-store",
-    });
+    const response = await fetch(`${process.env.BACKEND_URL}/api/v1/events?${params.toString()}`);
 
     if (!response.ok) {
       throw new Error("Failed to fetch events");
